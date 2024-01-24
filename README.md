@@ -1,6 +1,6 @@
 <h2 align="center">Hi 👋</h2>
 <h1 align="center">I'm Mohammad</h1>
-<h3 align="center">Principal DevOps Engineer & Architect</h3>
+<h3 align="center">Principal DevOps Engineer & Infrastructure Architect</h3>
 
 - 👨‍💻 Find me here [https://efazati.org](https://efazati.org)
 </p>
