@@ -1,0 +1,306 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[margin=0.5in,top=0.5in,bottom=0.55in]{geometry}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks,bookmarks=false,pdfusetitle=false]{hyperref}
+\usepackage{parskip}
+\usepackage{paracol}
+\usepackage{calc}
+\usepackage{hyphenat}
+\usepackage{needspace}
+\usepackage{fancyhdr}
+
+% Disable line-end word hyphenation
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=1000
+
+% Five close harmonious colors in the teal-emerald family + warm amber + neutrals
+\definecolor{c1}{HTML}{064E3B}   % deepest emerald - section headings
+\definecolor{c2}{HTML}{115E59}   % deep teal - company names (primary accent)
+\definecolor{c3}{HTML}{0D9488}   % medium teal - links, secondary
+\definecolor{c4}{HTML}{14B8A6}   % light teal - rule lines, accents
+\definecolor{c5}{HTML}{99F6E4}   % pale teal - backgrounds, pills
+\definecolor{warm}{HTML}{B45309} % amber - version label, special highlights
+% Aliases (keep existing macros working)
+\colorlet{accent}{c2}
+\colorlet{accentDark}{c1}
+\colorlet{accentLight}{c4}
+\definecolor{ink}{HTML}{0F172A}
+\definecolor{ink2}{HTML}{1E293B}
+\definecolor{muted}{HTML}{475569}
+\definecolor{mutedLight}{HTML}{94A3B8}
+\definecolor{rule}{HTML}{CBD5E1}
+\definecolor{pillBg}{HTML}{E6F4F2}
+\definecolor{pillText}{HTML}{0F4F4A}
+\definecolor{pillBorder}{HTML}{99D4CB}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=accent,
+  linkcolor=accent
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\linespread{1.04}
+
+% Bullet lists - compact, accent triangle
+\setlist[itemize]{leftmargin=11pt,labelsep=5pt,itemsep=1pt,topsep=2pt,parsep=0pt,partopsep=0pt}
+\renewcommand{\labelitemi}{{\color{accent}\scriptsize$\blacktriangleright$}}
+
+% Simple letter-spacer fallback (no soul package available)
+\newcommand{\so}[1]{#1}
+
+% Main section heading - dark emerald title, double-tone rule (teal + pale)
+\newcommand{\cvsection}[1]{%
+  \vspace{8pt}%
+  {\color{c1}\bfseries\fontsize{12}{14}\selectfont\so{\MakeUppercase{#1}}\hspace{6pt}{\color{c3}$\bullet$}}\\[2pt]%
+  {\color{c2}\rule{\linewidth}{0.8pt}}\\[-12pt]%
+}
+
+% Sidebar section heading - widow-protected so it doesn't dangle at page-bottom
+\newcommand{\sidesection}[1]{%
+  \needspace{6\baselineskip}%
+  \vspace{9pt}%
+  {\color{c1}\bfseries\fontsize{10}{12}\selectfont\so{\MakeUppercase{#1}}}\\[1pt]%
+  {\color{c4}\rule{\linewidth}{0.6pt}}\\[3pt]%
+  \nopagebreak%
+}
+
+% Helpers
+\newcommand{\meta}[1]{{\color{muted}\fontsize{8.5}{10}\selectfont #1}}
+
+% Role: company (accent) | position (ink2) | right-aligned dates (muted), all on a single line
+% \needspace ensures the title plus several lines of body stay together on one page
+% Professional role header: 2-row tabular with proper column alignment.
+% Row 1: company (bold accent) | dates (muted, right)
+% Row 2: position (warm amber) | location (muted, right)
+% Args: {company}{position}{location}{dates}
+\newcommand{\role}[4]{%
+  \needspace{5\baselineskip}%
+  \vspace{15pt}%
+  \noindent\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\color{accent}\bfseries\fontsize{12}{14}\selectfont #1} &
+    {\color{muted}\fontsize{8.5}{10}\selectfont #4} \\[5pt]
+    {\color{warm}\bfseries\fontsize{9.75}{11.5}\selectfont #2} &
+    {\color{muted}\fontsize{8.5}{10}\selectfont #3} \\
+  \end{tabular*}%
+  \par\vspace{6pt}\nopagebreak%
+}
+
+% Simpler 2-arg variant for "Earlier roles" header (no position/location split)
+\newcommand{\roleSimple}[2]{%
+  \needspace{4\baselineskip}%
+  \vspace{15pt}%
+  \noindent\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\color{accent}\bfseries\fontsize{12}{14}\selectfont #1} &
+    {\color{muted}\fontsize{8.5}{10}\selectfont #2} \\
+  \end{tabular*}%
+  \par\vspace{6pt}\nopagebreak%
+}
+
+% Tech line: forced new line, single line (text shrinks if needed via \resizebox)
+% Sort items by importance — only headline tech, never wraps to second line
+\newcommand{\techline}[1]{%
+  \par\vspace{3pt}\noindent%
+  \textcolor{c3}{\rule[-1pt]{2pt}{10pt}}\hspace{6pt}%
+  {\color{c2}\bfseries\fontsize{8}{10}\selectfont\so{TECH}}\hspace{6pt}%
+  {\color{ink2}\fontsize{8.5}{10}\selectfont #1}%
+  \par\vspace{6pt}%
+}
+
+% Skill group in sidebar
+\newcommand{\skillgroup}[2]{%
+  {\fontsize{9}{11}\selectfont\textbf{\color{ink}#1}}\\[0pt]%
+  {\fontsize{8.5}{11}\selectfont\color{muted} #2}\par\vspace{3pt}%
+}
+
+% Contact line item: warm accent label + ink content
+\newcommand{\contactitem}[2]{%
+  {\fontsize{8.5}{11}\selectfont {\color{c1}\textbf{\so{\MakeUppercase{#1}}}}\,\, {\color{ink}#2}}\par\vspace{2pt}%
+}
+
+\setlength{\emergencystretch}{2em}
+\columnratio{0.28}
+\setlength{\columnsep}{22pt}
+
+\begin{document}
+
+% ===== HEADER =====
+% Accent bar on top
+\noindent{\color{accent}\rule{\linewidth}{3pt}}\vspace{4pt}\\[-1pt]
+
+\noindent
+\begin{minipage}[t]{0.66\linewidth}
+\vspace{6pt}
+{\fontsize{24}{28}\selectfont\bfseries\color{ink} Mohammad Efazati}\\[5pt]
+{\fontsize{12}{15}\selectfont\color{accent}\bfseries Principal DevOps Engineer \,$\cdot$\, Co-Founder of EasyEnv}\\[8pt]
+{\fontsize{9.5}{12}\selectfont\color{ink}
+20+ years building production infrastructure and engineering teams across 50+ companies. Ran thousands of technical interviews along the way, and now co-founding \href{https://easyenv.io}{\color{accent}\textbf{EasyEnv}}, the hiring platform that interviews engineers on real Linux boxes, AI included.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}
+\vspace{6pt}
+\raggedleft
+\contactitem{Location}{Tullamore, Co. Offaly, Ireland}
+\contactitem{Phone}{+353 83 857 4516}
+\contactitem{Email}{\href{mailto:mohammad@efazati.org}{mohammad@efazati.org}}
+\contactitem{Web}{\href{https://efazati.org}{efazati.org}}
+\contactitem{GitHub}{\href{https://github.com/efazati}{github.com/efazati}}
+\contactitem{LinkedIn}{\href{https://linkedin.com/in/efazati}{linkedin.com/in/efazati}}
+\end{minipage}
+\vspace{14pt}
+
+% ===== TWO-COLUMN BODY =====
+\begin{paracol}{2}
+
+% ----- LEFT SIDEBAR -----
+\fontsize{9}{11.5}\selectfont
+
+\sidesection{Programming}
+\skillgroup{Expert}{Python (10+ years)}
+\skillgroup{Proficient}{Go, Bash}
+\skillgroup{Familiar}{Rust, Node.js, PHP, JavaScript}
+
+\sidesection{Cloud \& Infrastructure}
+\skillgroup{Cloud}{GCP, AWS, Hetzner, Cloudflare}
+\skillgroup{Linux}{Ubuntu, Debian, Red Hat, Rocky Linux, CentOS, FreeBSD}
+\skillgroup{Virtualization}{Proxmox, KVM, bare-metal, Vagrant}
+\skillgroup{Containers}{Kubernetes (5+ yrs), Docker, Podman, Helm}
+\skillgroup{IaC}{Terraform, Puppet, Ansible, HashiCorp Packer}
+\skillgroup{Networking}{OpenVPN, WireGuard, NetBird, DNS, BGP}
+\skillgroup{Databases}{PostgreSQL, MySQL, Redis, MongoDB, Cassandra}
+
+\sidesection{CI/CD \& Reliability}
+\skillgroup{Pipelines}{Jenkins, GitLab CI, GitHub Actions, CircleCI, ArgoCD}
+\skillgroup{Proxy / LB}{HAProxy, Nginx, Traefik, Squid Proxy}
+\skillgroup{Security}{HashiCorp Vault, Keycloak, SSO, OAuth, JWT}
+
+\sidesection{Observability}
+\skillgroup{Metrics / Tracing}{Prometheus, OpenTelemetry, Grafana, Loki, Tempo}
+\skillgroup{Stacks}{ELK, Datadog, Wavefront}
+
+\sidesection{AI \& LLM}
+\skillgroup{Models}{Claude (Opus, Sonnet, Haiku), GPT-4, Llama, DeepSeek}
+\skillgroup{Tooling}{Claude Code, Anthropic Agent SDK, Cursor, GitHub Copilot}
+\skillgroup{Integration}{Anthropic API, OpenAI API, Ollama, prompt caching, tool use}
+
+\sidesection{Frameworks}
+\skillgroup{Python}{Django, Flask, DRF, SQLAlchemy, Celery, Scrapy}
+\skillgroup{JS \& Go}{Next.js, Vue.js, Backbone.js, Socket.io, Gorilla Mux}
+\skillgroup{Misc}{Stripe, rrweb, WebSockets, Jitsi}
+
+\sidesection{Education}
+\skillgroup{Tehran University}{Bachelor of Software Engineering. 2009 -- Incomplete.}
+\skillgroup{NODET}{Mathematics track. 2002 -- 2009.}
+
+\sidesection{Community}
+{\fontsize{8.5}{11}\selectfont\color{ink}
+{\color{c2}\bfseries TehranLUG.} Co-Founder, 2009 -- present.\par\vspace{2pt}
+{\color{c2}\bfseries IrPycon.} Founder of the Iranian Python community, 2014 -- present.\par\vspace{2pt}
+{\color{c2}\bfseries SalamDonya.} Editor-in-chief of Iran's first free software magazine, 2016 -- 2017.\par\vspace{2pt}
+{\color{c2}\bfseries ZConf.} Presenter and editorial board, 2011 -- 2016.\par\vspace{2pt}
+{\color{c2}\bfseries Open source.} 38 public repos including
+\href{https://github.com/efazati/i3buntu}{\textit{\color{c3}i3buntu}} (57\,$\star$),
+\href{https://github.com/efazati/samwise}{\textit{\color{c3}samwise}},
+\href{https://github.com/efazati/satl}{\textit{\color{c3}satl}}.
+}
+
+\vfill
+\vspace{18pt}
+{\color{rule}\rule{\linewidth}{0.3pt}}\\[3pt]
+{\color{warm}\bfseries\fontsize{7.5}{9}\selectfont RESUME V2.1.0}\hfill{\color{mutedLight}\fontsize{7.5}{9}\selectfont\today}
+
+\switchcolumn
+
+% ----- RIGHT MAIN COLUMN -----
+
+\cvsection{Experience}
+\fontsize{9.5}{11.5}\selectfont
+
+\role{EasyEnv}{Co-Founder, at Donedeploy}{Remote, Ireland}{Jan 2023 -- Present}
+Hiring platform that interviews engineers on real production Linux. Candidates use AI; teams watch every keystroke. \href{https://easyenv.io}{\color{c3}EasyEnv} is Donedeploy's flagship product.
+\techline{Kubernetes, Terraform, AWS, GCP, Python, Next.js, Anthropic API, NetBird}
+\begin{itemize}
+  \item Built ephemeral VMs, session recording, multi-tenancy, OAuth/JWT, recipe-based machine config.
+  \item 58+ Ansible recipes for Kubernetes, ELK, monitoring, broken-on-purpose interview challenges.
+  \item Live collab: shared terminals, port-view proxy, Jitsi, rrweb replay with custom compression.
+  \item AI features via Claude + Anthropic Agent SDK. Engineered on Claude Code.
+  \item AI-era hiring positioning: candidates use AI, teams watch every keystroke.
+\end{itemize}
+
+\role{Royal Bank of Canada}{Principal DevOps Engineer, via Manakau}{Remote, Ireland}{Nov 2022 -- Sep 2023}
+Led 5 engineers building an internal developer platform so quant developers could ship to production without touching Jenkins, Kubernetes, or HTTP plumbing themselves.
+\techline{AWS, Kubernetes, OpenShift, OpenTelemetry, Python, Jenkins, Prometheus}
+\begin{itemize}
+  \item Introduced OpenTelemetry across services for vendor-agnostic observability.
+  \item Shipped a full developer environment with all required languages, tooling, and project scaffolding pre-wired.
+  \item Built custom Linux containers on OpenShift as Jenkins agents; deployed and operated the Prometheus cluster.
+\end{itemize}
+
+\roleSimple{Clover, Fiserv}{Nenagh, Ireland \, \,$\cdot$\, \, Dec 2020 -- Nov 2022}
+\noindent\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}r@{}}
+  {\color{warm}\bfseries EMEA DevOps Engineering Manager} & {\color{muted}\fontsize{8.5}{10}\selectfont May 2022 -- Nov 2022} \\
+\end{tabular*}\par
+Managed 8 engineers and the service architecture they owned.
+\techline{GCP, Kubernetes, Puppet, Terraform, Go, Jenkins, Vault}
+\begin{itemize}
+  \item Introduced an agile intake model (run-the-business vs. project work) to stabilize infrastructure delivery.
+  \item Redesigned Jenkins with autoscaling, HA, and a hardened security model.
+\end{itemize}
+\noindent\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}r@{}}
+  {\color{warm}\bfseries Staff DevOps Engineer} & {\color{muted}\fontsize{8.5}{10}\selectfont Dec 2020 -- May 2022} \\
+\end{tabular*}\par
+Owned reliability, performance, and capacity for Clover's products end-to-end.
+\begin{itemize}
+  \item Built outbound-request caching with Squid plus health-checked traffic rotation, written in Go.
+  \item Stood up ephemeral test environments alongside Dev Integration, Staging, and QA tiers.
+  \item Unified CI/CD across 200+ projects with a cleaner SCM strategy.
+\end{itemize}
+
+\role{Cainthus}{Senior DevOps Engineer}{Dublin, Ireland}{Sep 2018 -- Dec 2020}
+Built a hybrid cloud + edge platform so every team could ship autonomously.
+\techline{Kubernetes, AWS, Ansible, Terraform, Go, Python, NVIDIA Jetson, Raspberry Pi}
+\begin{itemize}
+  \item Wrote a Kubernetes + AWS wrapper (API and CLI) with ACL and integrated CI/CD.
+  \item Built the Kubernetes installation pipeline end-to-end as code.
+  \item Operated a 100+ node distributed Kubernetes cluster spanning x86 and ARM.
+  \item Automated OpenVPN deployment, monitoring, central user management, and HA.
+\end{itemize}
+
+\role{Noavaran Saramad Sharif}{DevOps Tech Lead}{Tehran, Iran}{Jul 2017 -- Sep 2018}
+Owned architecture, schema design, and CI/CD across the engineering team.
+\techline{Python, Django, Vue.js, Kubernetes, PostgreSQL, ELK}
+\begin{itemize}
+  \item Shipped \textit{Mobank wallet} (\href{http://mobank.co}{\color{c3}mobank.co}), a payment system integrated with government banks.
+  \item Designed an end-to-end encryption layer handling MITM, key exchange, and rotation.
+  \item Customized Open edX as the foundation for a local e-learning platform.
+\end{itemize}
+
+\role{AEC \, \,{\color{muted}\mdseries\fontsize{9}{11}\selectfont (formerly Cvas)}}{Co-Founder, Software Engineering Director}{Tehran, Iran}{Jan 2013 -- Jul 2017}
+Co-founded \textbf{\color{accent}Cvas} in 2013; acquired by AEC in 2015 and stayed on as Engineering Director. Led a 30+ engineer team, drove architecture, shipped the most complex modules.
+\techline{Python, Django, MongoDB, Cassandra, Go, Redis, Celery, RabbitMQ}
+\begin{itemize}
+  \item \href{http://www.argus-nms.com}{\color{c2}\textbf{ARGUS}}. Network and sensor monitoring at MTN Irancell (1M sensors per second).
+  \item \href{https://www.nanodlp.com}{\color{c2}\textbf{nanoDLP}}. First Iranian 3D printer software running on Raspberry Pi.
+  \item \href{http://mazanex.com}{\color{c2}\textbf{Mazanex}}. Currency, gold, and stock market monitoring with 6M daily visits.
+  \item \href{http://bab.ir}{\color{c2}\textbf{BAB}}. Marketplace for 8K+ Iranian shops; also powered \textit{Itzar} gold market.
+  \item Wikipedia analysis with Word2Vec and graph relations, TF-IDF news summarization, event-detection news aggregator.
+  \item Operated 30+ servers covering Nginx, uWSGI, GitLab CI, monitoring, backup, and disaster recovery.
+\end{itemize}
+
+\roleSimple{Earlier roles}{Tehran \, \,$\cdot$\, \, 2007 -- 2013}
+\vspace{2pt}
+{\color{c2}\textbf{Bayan.}} \meta{Senior Software Engineer, 2010 -- 2013.} Designed and shipped \textit{Blog.ir}, \textit{Bayanbox} (file sharing), \textit{Hod} (email), and Bayan SSO from scratch on Python, Django, and MongoDB.\\[7pt]
+{\color{c2}\textbf{Sepehr Andisheh Javan.}} \meta{Software Engineer, 2010.} SCORM LMS, web-based ERP, Tehran Short Film Festival site.\\[7pt]
+{\color{c2}\textbf{Farzan Institute.}} \meta{Software Engineer, 2009 -- 2010.} Moodle customizations: Farasa, Sanje, Faradata.\\[7pt]
+{\color{c2}\textbf{Freelance.}} \meta{2007 -- 2010.} 50+ websites and 30+ MVPs shipped for SMEs.
+
+\end{paracol}
+
+\end{document}
