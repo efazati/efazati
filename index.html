@@ -131,11 +131,60 @@
             display: flex; align-items: center; justify-content: space-between;
             height: 64px;
         }
-        .brand { color: #fff; font-weight: 600; font-size: 15px; }
-        .nav-links { display: flex; gap: 28px; }
+        .brand { color: #fff; font-weight: 600; font-size: 15px; white-space: nowrap; }
+
+        /* Checkbox-hack nav: hamburger on mobile, inline links on desktop */
+        .nav-menu { position: relative; }
+        .nav-toggle { display: none; } /* checkbox stays hidden */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            align-items: center; justify-content: center;
+            color: #C9D2EA;
+        }
+        .hamburger:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+
+        .nav-links {
+            display: flex; gap: 28px;
+            list-style: none; margin: 0; padding: 0;
+        }
         .nav-links a { color: #C9D2EA; font-size: 14px; }
         .nav-links a:hover { color: #fff; }
-        @media (max-width: 600px) { .nav-links { gap: 18px; } .nav-links a { font-size: 13px; } }
+
+        /* Mobile (<=720px): hamburger button, dropdown panel */
+        @media (max-width: 720px) {
+            .hamburger { display: inline-flex; }
+            .nav-menu .nav-links {
+                display: none;
+                position: absolute;
+                top: calc(100% + 8px); right: 0;
+                flex-direction: column;
+                gap: 0;
+                min-width: 180px;
+                padding: 8px;
+                border-radius: 12px;
+                border: 1px solid rgba(255,255,255,0.08);
+                background: rgba(5, 8, 22, 0.97);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+            }
+            .nav-toggle:checked ~ .nav-links { display: flex; }
+            .nav-menu .nav-links li { width: 100%; }
+            .nav-menu .nav-links a {
+                display: block;
+                padding: 10px 14px;
+                border-radius: 8px;
+                font-size: 14px;
+            }
+            .nav-menu .nav-links a:hover {
+                background: rgba(255,255,255,0.06);
+            }
+        }
 
         .hero { padding: 88px 0 72px; text-align: center; }
         .badge {
@@ -168,11 +217,33 @@
             font-weight: 500;
         }
         .hero .blurb {
-            color: #8F9BB7; font-size: 16px;
+            color: #B5C0DA; font-size: 16px;
             max-width: 640px; margin: 0 auto 36px;
         }
         .hero .blurb a { font-weight: 500; }
+        @media (max-width: 720px) {
+            .hero .blurb { color: #D0D8EF; }
+        }
         .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 720px) {
+            .ctas {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                max-width: 440px;
+                margin: 0 auto;
+            }
+            .ctas > .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 14px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+            .ctas > .btn:nth-child(3) {
+                grid-column: 1 / -1;
+            }
+        }
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 24px; border-radius: 36px;
@@ -704,7 +775,11 @@
 <header class="nav">
     <div class="container nav-inner">
         <a href="/" class="brand">Mohammad Efazati</a>
-        <nav aria-label="Primary">
+        <nav class="nav-menu" aria-label="Primary">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+            <label for="nav-toggle" class="hamburger" aria-label="Toggle menu" title="Menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </label>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#easyenv">EasyEnv</a></li>
