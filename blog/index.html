@@ -8,7 +8,8 @@
 <meta name="author" content="Mohammad Efazati">
 <link rel="canonical" href="https://efazati.org/blog/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#060914">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://efazati.org/blog/">
 <meta property="og:title" content="Writing by Mohammad Efazati">
@@ -21,83 +22,42 @@
 <link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
 <link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
 <link rel="stylesheet" href="/assets/css/site.css">
-<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Blog","name":"Mohammad Efazati: writing","url":"https://efazati.org/blog/","author":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"}}
 </script>
 </head>
 <body>
-<div class="bg-fx" aria-hidden="true"></div>
-<header class="nav">
-    <div class="container nav-inner">
-        <a href="/" class="brand"><img src="/assets/images/me.webp" alt="" width="30" height="30">Mohammad Efazati</a>
-        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-            <svg class="i-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-            <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-        </button>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="/#capabilities">What I do</a></li>
-            <li><a href="/#experience">Experience</a></li>
-            <li><a href="/blog/" aria-current="page">Writing</a></li>
-            <li><a href="/#easyenv">EasyEnv</a></li>
-            <li class="nav-cta"><a href="/#contact">Contact</a></li>
-        </ul>
-    </div>
+<div class="wrap">
+<header class="top">
+    <a class="name" href="/">Mohammad Efazati</a>
+    <nav aria-label="Primary">
+        <a href="/#about">About</a>
+        <a href="/blog/" aria-current="page">Writing</a>
+        <a href="/#contact">Contact</a>
+    </nav>
 </header>
-<div class="nav-scrim" aria-hidden="true"></div>
 <main>
-<section class="page-head" style="padding-bottom:40px">
-    <div class="container">
-        <p class="eyebrow">Writing</p>
-        <h1>Notes from <span class="gradient-text">twenty years</span> of infrastructure</h1>
-        <p>Platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have actually done.</p>
-    </div>
-</section>
-<div class="container">
-    <div class="post-list">
-        <a class="post-row" href="/blog/hiring-engineers-when-ai-is-in-the-room/">
-            <div class="meta"><span class="tag">Hiring</span>17 Nov 2026 &middot; 3 min</div>
-            <div><h2>Hiring engineers when AI is in the room</h2><p>Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.</p></div>
-        </a>
-        <a class="post-row" href="/blog/engineering-with-claude-code/">
-            <div class="meta"><span class="tag">AI</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>How I build with AI coding agents every day</h2><p>A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.</p></div>
-        </a>
-        <a class="post-row" href="/blog/first-30-days-with-an-unfamiliar-infrastructure/">
-            <div class="meta"><span class="tag">Platform</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>The first 30 days with an unfamiliar infrastructure</h2><p>How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.</p></div>
-        </a>
-        <a class="post-row" href="/blog/broken-on-purpose/">
-            <div class="meta"><span class="tag">EasyEnv</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>Broken on purpose: designing interview challenges that feel like the job</h2><p>How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.</p></div>
-        </a>
-        <a class="post-row" href="/blog/kubernetes-at-the-edge-on-x86-and-arm/">
-            <div class="meta"><span class="tag">Kubernetes</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>Kubernetes at the edge, on x86 and ARM</h2><p>Lessons from running a 100+ node Kubernetes cluster that spanned cloud servers, NVIDIA Jetsons and Raspberry Pis: multi-arch images, flaky links and installs as code.</p></div>
-        </a>
-        <a class="post-row" href="/blog/opentelemetry-before-the-vendor/">
-            <div class="meta"><span class="tag">Observability</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>OpenTelemetry before the vendor</h2><p>Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.</p></div>
-        </a>
-        <a class="post-row" href="/blog/one-ci-cd-for-200-projects/">
-            <div class="meta"><span class="tag">CI/CD</span>17 Nov 2026 &middot; 2 min</div>
-            <div><h2>One CI/CD for 200 projects</h2><p>Unifying build and deploy across 200+ projects at a payments company: a single SCM strategy, a Jenkins nobody has to worry about, and caching the outside world.</p></div>
-        </a>
-    </div>
-</div>
+<h1 class="page-title">Writing</h1>
+<p class="page-sub">Notes on platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have done.</p>
+<ul class="posts">
+    <li><a href="/blog/hiring-engineers-when-ai-is-in-the-room/">Hiring engineers when AI is in the room</a><p>Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.</p><div class="meta">17 Nov 2026 &middot; Hiring &middot; 3 min</div></li>
+    <li><a href="/blog/engineering-with-claude-code/">How I build with AI coding agents every day</a><p>A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.</p><div class="meta">17 Nov 2026 &middot; AI &middot; 2 min</div></li>
+    <li><a href="/blog/first-30-days-with-an-unfamiliar-infrastructure/">The first 30 days with an unfamiliar infrastructure</a><p>How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.</p><div class="meta">17 Nov 2026 &middot; Platform &middot; 2 min</div></li>
+    <li><a href="/blog/broken-on-purpose/">Broken on purpose: designing interview challenges that feel like the job</a><p>How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.</p><div class="meta">17 Nov 2026 &middot; EasyEnv &middot; 2 min</div></li>
+    <li><a href="/blog/kubernetes-at-the-edge-on-x86-and-arm/">Kubernetes at the edge, on x86 and ARM</a><p>Lessons from running a 100+ node Kubernetes cluster that spanned cloud servers, NVIDIA Jetsons and Raspberry Pis: multi-arch images, flaky links and installs as code.</p><div class="meta">17 Nov 2026 &middot; Kubernetes &middot; 2 min</div></li>
+    <li><a href="/blog/opentelemetry-before-the-vendor/">OpenTelemetry before the vendor</a><p>Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.</p><div class="meta">17 Nov 2026 &middot; Observability &middot; 2 min</div></li>
+    <li><a href="/blog/one-ci-cd-for-200-projects/">One CI/CD for 200 projects</a><p>Unifying build and deploy across 200+ projects at a payments company: a single SCM strategy, a Jenkins nobody has to worry about, and caching the outside world.</p><div class="meta">17 Nov 2026 &middot; CI/CD &middot; 2 min</div></li>
+</ul>
 </main>
 <footer>
-    <div class="container foot">
-        <p style="margin:0">&copy; 2006 - 2026 Mohammad Efazati. Building <a href="https://easyenv.io/">EasyEnv</a> at <a href="https://donedeploy.com/">Donedeploy</a>.</p>
-        <nav aria-label="Footer">
-            <a href="/blog/">Writing</a>
-            <a href="/feed.xml">RSS</a>
-            <a href="/llms.txt">llms.txt</a>
-            <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
-            <a href="https://github.com/efazati" rel="me">GitHub</a>
-        </nav>
-    </div>
+    <span>&copy; 2026 Mohammad Efazati</span>
+    <nav aria-label="Footer">
+        <a href="/feed.xml">RSS</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/efazati" rel="me">GitHub</a>
+        <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+    </nav>
 </footer>
-<script src="/assets/js/site.js" defer></script>
+</div>
 </body>
 </html>

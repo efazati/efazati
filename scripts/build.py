@@ -73,7 +73,8 @@ HEAD = """<!DOCTYPE html>
 <meta name="author" content="Mohammad Efazati">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#060914">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="{ogtype}">
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{ogtitle}">
@@ -86,45 +87,33 @@ HEAD = """<!DOCTYPE html>
 <link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
 <link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
 <link rel="stylesheet" href="/assets/css/site.css">
-<script>document.documentElement.classList.add('js')</script>
 {ld}
 </head>
 <body>
-<div class="bg-fx" aria-hidden="true"></div>
+<div class="wrap">
 """
 
-NAV = """<header class="nav">
-    <div class="container nav-inner">
-        <a href="/" class="brand"><img src="/assets/images/me.webp" alt="" width="30" height="30">Mohammad Efazati</a>
-        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-            <svg class="i-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-            <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-        </button>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="/#capabilities">What I do</a></li>
-            <li><a href="/#experience">Experience</a></li>
-            <li><a href="/blog/"{blog_current}>Writing</a></li>
-            <li><a href="/#easyenv">EasyEnv</a></li>
-            <li class="nav-cta"><a href="/#contact">Contact</a></li>
-        </ul>
-    </div>
+# Kept identical to the header in index.html, which is hand-written.
+TOP = """<header class="top">
+    <a class="name" href="/">Mohammad Efazati</a>
+    <nav aria-label="Primary">
+        <a href="/#about">About</a>
+        <a href="/blog/"{blog_current}>Writing</a>
+        <a href="/#contact">Contact</a>
+    </nav>
 </header>
-<div class="nav-scrim" aria-hidden="true"></div>
 """
 
 FOOT = """<footer>
-    <div class="container foot">
-        <p style="margin:0">&copy; 2006 - {year} Mohammad Efazati. Building <a href="https://easyenv.io/">EasyEnv</a> at <a href="https://donedeploy.com/">Donedeploy</a>.</p>
-        <nav aria-label="Footer">
-            <a href="/blog/">Writing</a>
-            <a href="/feed.xml">RSS</a>
-            <a href="/llms.txt">llms.txt</a>
-            <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
-            <a href="https://github.com/efazati" rel="me">GitHub</a>
-        </nav>
-    </div>
+    <span>&copy; {year} Mohammad Efazati</span>
+    <nav aria-label="Footer">
+        <a href="/feed.xml">RSS</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/efazati" rel="me">GitHub</a>
+        <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+    </nav>
 </footer>
-<script src="/assets/js/site.js" defer></script>
+</div>
 </body>
 </html>
 """
@@ -133,33 +122,28 @@ FOOT = """<footer>
 def page(title, ogtitle, desc, url, body, ogtype="website", ld="", blog_current=False):
     return (
         HEAD.format(title=E(title), ogtitle=E(ogtitle), desc=E(desc), url=url, ogtype=ogtype, ld=ld)
-        + NAV.format(blog_current=' aria-current="page"' if blog_current else "")
+        + TOP.format(blog_current=' aria-current="page"' if blog_current else "")
         + body
         + FOOT.format(year=dt.date.today().year)
     )
 
 
-def row(p):
-    return f"""        <a class="post-row" href="{p['path']}">
-            <div class="meta"><span class="tag">{E(p['tag'])}</span>{nice_date(p['date'])} &middot; {p['minutes']} min</div>
-            <div><h2>{E(p['title'])}</h2><p>{E(p['description'])}</p></div>
-        </a>
+def item(p):
+    return f"""    <li><a href="{p['path']}">{E(p['title'])}</a><p>{E(p['description'])}</p><div class="meta">{nice_date(p['date'])} &middot; {E(p['tag'])} &middot; {p['minutes']} min</div></li>
+"""
+
+
+def short(p):
+    return f"""    <li><a href="{p['path']}">{E(p['title'])}</a><span class="side">{E(p['tag'])}</span></li>
 """
 
 
 def build_blog_index(posts):
     body = f"""<main>
-<section class="page-head" style="padding-bottom:40px">
-    <div class="container">
-        <p class="eyebrow">Writing</p>
-        <h1>Notes from <span class="gradient-text">twenty years</span> of infrastructure</h1>
-        <p>Platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have actually done.</p>
-    </div>
-</section>
-<div class="container">
-    <div class="post-list">
-{''.join(row(p) for p in posts)}    </div>
-</div>
+<h1 class="page-title">Writing</h1>
+<p class="page-sub">Notes on platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have done.</p>
+<ul class="posts">
+{''.join(item(p) for p in posts)}</ul>
 </main>
 """
     ld = """<script type="application/ld+json">
@@ -191,32 +175,18 @@ def build_post(p, posts):
     )
     body = f"""<main>
 <article class="article">
-    <div class="container">
-        <p class="crumbs"><a href="/">home</a> / <a href="/blog/">writing</a> / {E(p['tag'].lower())}</p>
-        <h1>{E(p['title'])}</h1>
-        <p class="dek">{E(p['description'])}</p>
-        <div class="byline">
-            <img src="/assets/images/me.webp" alt="" width="40" height="40">
-            <div><b>Mohammad Efazati</b><time datetime="{p['date']}">{nice_date(p['date'])}</time> &middot; {p['minutes']} min read</div>
-        </div>
-        <div class="prose">
+    <h1>{E(p['title'])}</h1>
+    <p class="meta"><time datetime="{p['date']}">{nice_date(p['date'])}</time> &middot; {E(p['tag'])} &middot; {p['minutes']} min read</p>
+    <div class="prose">
 {p['body']}
-        </div>
-        <aside class="post-end">
-            <h3>Working on something like this?</h3>
-            <p>I am always happy to compare notes. Mail me or find me on LinkedIn.</p>
-            <div class="ctas">
-                <a class="btn btn-ghost" href="/#contact">Get in touch</a>
-                <a class="btn btn-ghost" href="/blog/">More writing</a>
-            </div>
-        </aside>
-        <div class="more-posts">
-            <h3>// more writing</h3>
-            <div class="post-list">
-{''.join(row(o) for o in others)}            </div>
-        </div>
     </div>
 </article>
+<div class="after">
+    <p>Thoughts on this? I am happy to compare notes: <a href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>.</p>
+    <p class="label">More writing</p>
+    <ul class="list">
+{''.join(short(o) for o in others)}    </ul>
+</div>
 </main>
 """
     out = page(
@@ -238,22 +208,13 @@ def json_str(s):
 
 
 def build_home_cards(posts):
-    """Fill the Writing section of index.html between its markers."""
-    cards = []
-    for i, p in enumerate(posts[:4]):
-        big = " big" if i == 0 else ""
-        cards.append(f"""                <a class="post-card{big}" href="{p['path']}">
-                    <div class="meta"><span class="tag">{E(p['tag'])}</span> &middot; {p['minutes']} min read</div>
-                    <h3>{E(p['title'])}</h3>
-                    <p>{E(p['description'])}</p>
-                    <span class="more">Read &rarr;</span>
-                </a>
-""")
+    """Fill the Writing list of index.html between its markers."""
+    rows = "".join("        " + short(p).strip() + "\n" for p in posts[:5])
     idx = ROOT / "index.html"
     text = idx.read_text()
     new, n = re.subn(
         r"(<!-- posts:start -->\n).*?(\s*<!-- posts:end -->)",
-        lambda m: m.group(1) + "".join(cards).rstrip("\n") + m.group(2),
+        lambda m: m.group(1) + rows + "        <!-- posts:end -->",
         text,
         flags=re.S,
     )
