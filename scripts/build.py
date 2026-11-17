@@ -101,6 +101,7 @@ TOP = """<header class="top">
     <a class="name" href="/">Efazati</a>
     <nav aria-label="Primary">
         <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
         <a href="/blog/"{blog_current}>Writing</a>
         <a href="/#contact">Contact</a>
     </nav>

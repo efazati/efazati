@@ -106,6 +106,25 @@ footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wr
 footer nav { display: flex; gap: 20px; }
 footer a { text-decoration: none; }
 
+/* Now: EasyEnv large, Donedeploy beside it, then the other projects. */
+.feature { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #111113; margin-bottom: 16px; }
+.feature img { width: 100%; height: auto; border-bottom: 1px solid var(--line); }
+.feature-text { padding: 26px 28px 28px; }
+.feature h3, .dd h3 { font-size: 34px; letter-spacing: -.03em; font-weight: 800; margin: 6px 0 10px; }
+.feature p:not(.eyebrow), .dd p:not(.eyebrow) { color: var(--soft); margin: 0; max-width: 40em; }
+.feature .eyebrow, .dd .eyebrow { color: var(--accent); margin: 0; }
+.feature:hover h3, .dd:hover h3, .proj:hover b { color: var(--accent); }
+.dd { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; text-decoration: none; border: 1px solid var(--line); border-radius: 8px; padding: 26px 28px; background: #111113; }
+.dd h3 { font-size: 28px; }
+.dd img { width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); }
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 28px; }
+.proj { text-decoration: none; display: block; }
+.proj img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 16px; transition: transform .2s; }
+.proj:hover img { transform: translateY(-3px); }
+.proj b { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.proj .url { color: var(--muted); font-size: 14px; margin-left: 10px; }
+.proj p { color: var(--muted); font-size: 15.5px; margin: 6px 0 0; }
+
 /* Blog index. */
 .page-head { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
 .page-head h1 { font-size: clamp(54px, 8vw, 112px); line-height: .92; letter-spacing: -.05em; font-weight: 800; margin-bottom: 20px; }
@@ -160,7 +179,10 @@ footer a { text-decoration: none; }
     .row { grid-template-columns: 1fr; gap: 20px; padding: 52px 0; }
     .row > h2 { padding-top: 0; }
     .work { grid-template-columns: 1fr; }
-    .cards { grid-template-columns: 1fr; }
+    .cards, .projects { grid-template-columns: 1fr; }
+    .dd { grid-template-columns: 1fr; padding: 22px; }
+    .feature-text { padding: 22px; }
+    .feature h3 { font-size: 28px; }
     .card { aspect-ratio: auto; min-height: 190px; }
     .card h3 { font-size: 24px; margin-top: 28px; }
     .jobs li { grid-template-columns: 1fr; gap: 2px; }

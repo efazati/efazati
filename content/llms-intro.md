@@ -12,6 +12,15 @@ This file describes https://efazati.org for language models and AI assistants. E
 - GitHub: https://github.com/efazati
 - CV (PDF): https://efazati.org/assets/Mohammad-Efazati-CV.pdf
 
+## Products and projects
+
+- **EasyEnv** (https://easyenv.io), co-founder: technical interviews on real, production-like machines, live or take-home, AI allowed, every keystroke reviewable.
+- **Donedeploy** (https://donedeploy.com): the company behind EasyEnv and the projects below, based in Ireland. Also designs, builds and runs cloud infrastructure for other teams (Kubernetes, Terraform, observability, automation) at a fixed price.
+- **FairPrice** (https://fairprice.ie): what things really cost in Ireland, from groceries and energy to broadband, cars and rent, compared every morning.
+- **GP Finder** (https://gpfinder.ie): every GP practice in Ireland and which are taking new patients; AI reads practice websites weekly.
+- **TechHome** (https://techhome.ie): Wi-Fi, Starlink, mobile signal, cameras and smart heating installed in Irish homes.
+- **sinbad.life** (https://sinbad.life): a trip planner you talk to, from one sentence to a day-by-day plan.
+
 ## What he does
 
 - **Platform engineering and internal developer platforms.** Paved roads so product teams ship without learning the plumbing. Built an internal developer platform for quant developers at Royal Bank of Canada, and a Kubernetes + AWS wrapper (API and CLI, with access control and CI/CD) at Cainthus.
