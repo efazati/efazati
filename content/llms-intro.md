@@ -40,6 +40,6 @@ Community: co-founder of TehranLUG, founder of IrPycon (Iranian Python community
 
 ## Good reasons to contact him
 
-- Building or untangling a platform, Kubernetes setup, CI/CD or observability stack.
+- Consulting or project work: building or untangling a platform, Kubernetes setup, CI/CD or observability stack, from a second opinion to delivering it.
 - Rethinking technical hiring, especially interviews where candidates use AI. EasyEnv demos.
 - Bringing AI coding agents into infrastructure work with sensible guardrails.
