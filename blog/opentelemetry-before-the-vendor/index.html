@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenTelemetry before the vendor | Mohammad Efazati</title>
+<meta name="description" content="Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.">
+<meta name="author" content="Mohammad Efazati">
+<link rel="canonical" href="https://efazati.org/blog/opentelemetry-before-the-vendor/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#060914">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://efazati.org/blog/opentelemetry-before-the-vendor/">
+<meta property="og:title" content="OpenTelemetry before the vendor">
+<meta property="og:description" content="Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.">
+<meta property="og:image" content="https://efazati.org/assets/images/me.jpg">
+<meta property="og:site_name" content="Mohammad Efazati">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenTelemetry before the vendor">
+<meta name="twitter:description" content="Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.">
+<link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
+<link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"OpenTelemetry before the vendor","description":"Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.","datePublished":"2026-11-17","dateModified":"2026-11-17","url":"https://efazati.org/blog/opentelemetry-before-the-vendor/","mainEntityOfPage":"https://efazati.org/blog/opentelemetry-before-the-vendor/","image":"https://efazati.org/assets/images/me.jpg","author":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"},"publisher":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"}}
+</script>
+</head>
+<body>
+<div class="bg-fx" aria-hidden="true"></div>
+<header class="nav">
+    <div class="container nav-inner">
+        <a href="/" class="brand"><img src="/assets/images/me.webp" alt="" width="30" height="30">Mohammad Efazati</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+            <svg class="i-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+            <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/#capabilities">What I do</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/blog/" aria-current="page">Writing</a></li>
+            <li><a href="/#easyenv">EasyEnv</a></li>
+            <li class="nav-cta"><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
+<div class="nav-scrim" aria-hidden="true"></div>
+<main>
+<article class="article">
+    <div class="container">
+        <p class="crumbs"><a href="/">home</a> / <a href="/blog/">writing</a> / observability</p>
+        <h1>OpenTelemetry before the vendor</h1>
+        <p class="dek">Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.</p>
+        <div class="byline">
+            <img src="/assets/images/me.webp" alt="" width="40" height="40">
+            <div><b>Mohammad Efazati</b><time datetime="2026-11-17">17 Nov 2026</time> &middot; 2 min read</div>
+        </div>
+        <div class="prose">
+<p>At Royal Bank of Canada I led a small team building an internal developer platform. The people using it were quant developers: very good at their own work, and with no interest in learning Jenkins, Kubernetes or HTTP plumbing. The platform's job was to let them ship to production without touching any of it.</p>
+
+<p>One of the first decisions was how services would report what they were doing. We chose OpenTelemetry, before choosing where the data would go. I would make the same choice again anywhere.</p>
+
+<h2>Instrumentation outlives backends</h2>
+
+<p>Instrumenting a codebase is expensive. It touches every service, every library, every team. Backends, on the other hand, change: a contract ends, a new tool is cheaper, a team inherits a different stack after a reorganisation.</p>
+
+<p>If your traces and metrics are written against one vendor's SDK, switching vendors means re-instrumenting everything. If they are written against OpenTelemetry, switching is a collector config change.</p>
+
+<pre><code>exporters:
+  otlp/tempo:
+    endpoint: tempo:4317
+  prometheus:
+    endpoint: 0.0.0.0:8889
+service:
+  pipelines:
+    traces:  { receivers: [otlp], exporters: [otlp/tempo] }
+    metrics: { receivers: [otlp], exporters: [prometheus] }</code></pre>
+
+<p>That separation is the whole point. Code says what happened. The collector decides where it goes.</p>
+
+<h2>Make it the default, not a task</h2>
+
+<p>On a platform, observability only works if it is already there when a developer arrives. We baked it into the developer environment and the project scaffolding, so a new service came with tracing, metrics and sensible resource attributes from its first commit. Nobody had to read a wiki page to be observable.</p>
+
+<p>The same applied underneath: we ran our own Prometheus cluster and built custom Linux containers on OpenShift as Jenkins agents, so the build and runtime sides told the same story.</p>
+
+<h2>Things that matter more than the tool</h2>
+
+<ul>
+<li><strong>Consistent service names and attributes.</strong> A trace that crosses five services is useless if each one names itself differently.</li>
+<li><strong>Sampling decided on purpose.</strong> Keep every error and slow request; sample the boring successes.</li>
+<li><strong>Dashboards that answer a question.</strong> "Is checkout slower than yesterday?" beats forty panels of CPU graphs.</li>
+<li><strong>Alerts on symptoms, not causes.</strong> Page on users seeing errors, not on a node's memory at 80%.</li>
+</ul>
+
+<h2>The stack I reach for</h2>
+
+<p>When I get to choose, it is usually OpenTelemetry for instrumentation, Prometheus for metrics, Loki for logs, Tempo for traces and Grafana on top. All open, all replaceable, and they work well together. But the real recommendation is the order: instrument with an open standard first, pick the backend second, and keep the two apart.</p>
+
+<p>Want a second opinion on your observability setup? <a href="https://app.reclaim.ai/m/efazati">Book a call</a>.</p>
+        </div>
+        <aside class="post-end">
+            <h3>Working on something like this?</h3>
+            <p>I help teams with platform engineering, Kubernetes, observability and technical hiring. Thirty minutes is usually enough to tell whether I can help.</p>
+            <div class="ctas">
+                <a class="btn btn-primary" href="https://app.reclaim.ai/m/efazati">Book a call</a>
+                <a class="btn btn-ghost" href="/#capabilities">What I do</a>
+            </div>
+        </aside>
+        <div class="more-posts">
+            <h3>// more writing</h3>
+            <div class="post-list">
+        <a class="post-row" href="/blog/hiring-engineers-when-ai-is-in-the-room/">
+            <div class="meta"><span class="tag">Hiring</span>17 Nov 2026 &middot; 3 min</div>
+            <div><h2>Hiring engineers when AI is in the room</h2><p>Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.</p></div>
+        </a>
+        <a class="post-row" href="/blog/engineering-with-claude-code/">
+            <div class="meta"><span class="tag">AI</span>17 Nov 2026 &middot; 2 min</div>
+            <div><h2>How I build with AI coding agents every day</h2><p>A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.</p></div>
+        </a>
+        <a class="post-row" href="/blog/first-30-days-with-an-unfamiliar-infrastructure/">
+            <div class="meta"><span class="tag">Platform</span>17 Nov 2026 &middot; 2 min</div>
+            <div><h2>The first 30 days with an unfamiliar infrastructure</h2><p>How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.</p></div>
+        </a>
+            </div>
+        </div>
+    </div>
+</article>
+</main>
+<footer>
+    <div class="container foot">
+        <p style="margin:0">&copy; 2006 - 2026 Mohammad Efazati. Building <a href="https://easyenv.io/">EasyEnv</a> at <a href="https://donedeploy.com/">Donedeploy</a>.</p>
+        <nav aria-label="Footer">
+            <a href="/blog/">Writing</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="/llms.txt">llms.txt</a>
+            <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+            <a href="https://github.com/efazati" rel="me">GitHub</a>
+        </nav>
+    </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

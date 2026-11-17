@@ -1,0 +1,393 @@
+# Mohammad Efazati
+
+> Principal DevOps Engineer and infrastructure architect based in Tullamore, Ireland, with 20+ years building production infrastructure and engineering teams across 50+ companies. Co-founder of EasyEnv (https://easyenv.io), the hiring platform that interviews engineers on real Linux machines with AI allowed, built at Donedeploy (https://donedeploy.com).
+
+This file describes https://efazati.org for language models and AI assistants. Everything here is also on the human-readable site.
+
+## Contact
+
+- Email: mohammad@efazati.org
+- Book a 30-minute call: https://app.reclaim.ai/m/efazati
+- LinkedIn: https://www.linkedin.com/in/efazati
+- GitHub: https://github.com/efazati
+- CV (PDF): https://efazati.org/assets/Mohammad-Efazati-CV.pdf
+
+## What he does
+
+- **Platform engineering and internal developer platforms.** Paved roads so product teams ship without learning the plumbing. Built an internal developer platform for quant developers at Royal Bank of Canada, and a Kubernetes + AWS wrapper (API and CLI, with access control and CI/CD) at Cainthus.
+- **Kubernetes and cloud.** 5+ years of Kubernetes in production, including a 100+ node cluster spanning x86 and ARM edge devices (NVIDIA Jetson, Raspberry Pi). AWS, GCP, Hetzner, Cloudflare, OpenShift, Proxmox and bare metal.
+- **Infrastructure as code.** Terraform, Ansible, Puppet, HashiCorp Packer. Kubernetes installation pipelines end to end as code; 58+ Ansible recipes at EasyEnv.
+- **CI/CD at scale.** Unified CI/CD across 200+ projects at Clover (Fiserv); redesigned Jenkins with autoscaling, HA and a hardened security model; ephemeral test environments. Jenkins, GitLab CI, GitHub Actions, ArgoCD.
+- **Observability.** OpenTelemetry-first, vendor-agnostic instrumentation; Prometheus, Grafana, Loki, Tempo, ELK, Datadog.
+- **Security and networking.** HashiCorp Vault, Keycloak, SSO, OAuth/JWT, WireGuard, NetBird, OpenVPN (automated, monitored, HA), DNS, BGP.
+- **Technical hiring.** Has run thousands of technical interviews; designs realistic, AI-inclusive interview processes on real machines.
+- **AI-assisted engineering.** Builds daily with Claude Code and the Anthropic Agent SDK; ships AI features on the Anthropic API.
+- **Engineering leadership.** Led a 30+ engineer team as Software Engineering Director, managed the EMEA DevOps team at Clover (8 engineers), led 5 engineers at RBC.
+
+Languages: Python (expert, 10+ years), Go, Bash; familiar with Rust, Node.js, PHP, JavaScript.
+
+## Experience
+
+- **EasyEnv, Co-Founder** (at Donedeploy), 2023 to present. Ephemeral VMs, session recording, multi-tenancy, recipe-based machine config, live collaboration, AI features on Claude.
+- **Royal Bank of Canada, Principal DevOps Engineer** (via Manakau), 2022 to 2023. Internal developer platform, OpenTelemetry, OpenShift, Prometheus.
+- **Clover (Fiserv), EMEA DevOps Engineering Manager and Staff DevOps Engineer**, 2020 to 2022. CI/CD for 200+ projects, Jenkins redesign, Go-based outbound caching with Squid, GCP and Kubernetes.
+- **Cainthus, Senior DevOps Engineer**, 2018 to 2020. Hybrid cloud and edge platform, 100+ node x86/ARM Kubernetes cluster.
+- **Noavaran Saramad Sharif, DevOps Tech Lead**, 2017 to 2018. Mobank wallet payment system, end-to-end encryption layer.
+- **AEC (formerly Cvas), Co-Founder and Software Engineering Director**, 2013 to 2017. 30+ engineers; ARGUS network monitoring (1M sensors per second at MTN Irancell), nanoDLP, Mazanex.
+- **Bayan and earlier roles**, 2007 to 2013. Blog.ir, Bayanbox, Hod mail, Bayan SSO; 50+ websites as a freelancer.
+
+Community: co-founder of TehranLUG, founder of IrPycon (Iranian Python community), former editor-in-chief of SalamDonya, the first free software magazine in Iran.
+
+## Good reasons to contact him
+
+- Building or untangling a platform, Kubernetes setup, CI/CD or observability stack.
+- Rethinking technical hiring, especially interviews where candidates use AI. EasyEnv demos.
+- Bringing AI coding agents into infrastructure work with sensible guardrails.
+
+# Writing
+
+## Hiring engineers when AI is in the room
+
+URL: https://efazati.org/blog/hiring-engineers-when-ai-is-in-the-room/  
+Published: 2026-11-17 · Topic: Hiring
+
+_Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now._
+
+I have run thousands of technical interviews over twenty years. For most of that time the hard part was the format: LeetCode puzzles that predicted nothing, take-home tasks you could not trust, whiteboard sessions that rewarded people who had practised whiteboard sessions. Then AI arrived and made every one of those formats worse at once.
+
+The common reaction was to ban it. Lock the browser, forbid the assistant, watch for a second screen. I understand the instinct, but it tests a job that no longer exists. The engineer you hire will use AI on their first morning. If the interview pretends otherwise, you learn how someone performs in a situation they will never be in again.
+
+### The answer stopped being the signal
+
+When a model can produce a correct function in four seconds, a correct function tells you very little. What still separates people is everything around it:
+
+- **How they frame the problem** before they type anything. Do they read the logs, check what is running, ask what "done" means?
+- **What they ask the model,** and how specific they are. A vague prompt and a precise one say a lot about how well someone understands the system in front of them.
+- **Whether they check the output.** The dangerous engineer is not the one who uses AI. It is the one who pastes whatever comes back into production.
+- **What they do when it is wrong.** Models are confidently wrong often enough that recovering from a bad suggestion is now a core skill.
+
+None of that shows up in the final answer. All of it shows up in the process.
+
+### Put them on a real machine
+
+The other half of the problem is the environment. Most interview tools give a candidate an editor and a "run" button. Real work happens on a Linux box with a broken service, a full disk, a misconfigured proxy and a log file that is lying to you. Infrastructure and backend roles especially are about the system, not the snippet.
+
+So the interview should look like the job: a real machine, the tools the role actually uses, AI available, and a problem that has more than one reasonable way in. Then you watch how they get there.
+
+> Let candidates use AI the way they will at work, and make the process the thing you evaluate.
+
+### What I look for now
+
+When I review a session today, these are the moments I go back to:
+
+- **The first two minutes.** Does the candidate orient themselves (`systemctl status`, `journalctl`, `df -h`, reading the task twice) or start changing things?
+- **The first wrong turn.** Everyone takes one. How long before they notice, and what makes them notice?
+- **The handoff to AI.** Is the model a tool they direct or a crutch they follow?
+- **The verification.** Did they prove the fix, or did the error just go away?
+
+A candidate who takes longer but verifies every step is usually a better hire than one who finishes fast and cannot say why it works.
+
+### Why I built EasyEnv
+
+I wanted this kind of interview to be the easy option rather than a special effort. That is what [EasyEnv](https://easyenv.io/) does: interviews on real Linux machines in the browser, AI allowed, and a full replay of every terminal, editor and browser action so the team can review the process, not just the result.
+
+If you are rethinking how your team hires engineers, I am always happy to compare notes. [Grab thirty minutes on my calendar](https://app.reclaim.ai/m/efazati).
+
+---
+
+## How I build with AI coding agents every day
+
+URL: https://efazati.org/blog/engineering-with-claude-code/  
+Published: 2026-11-17 · Topic: AI
+
+_A DevOps engineer's working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter._
+
+Most of the code I ship today is written with an AI coding agent in the loop. EasyEnv itself is engineered with Claude Code, and its AI features are built on the Anthropic API and Agent SDK. After a lot of hours with these tools on real infrastructure, here is how I use them, and where I do not.
+
+### Hand over the typing, keep the judgement
+
+Agents are excellent at the parts of the job that are mostly typing: wiring a new endpoint through four layers, writing the tests for a function you have already designed, converting a shell script into a proper tool, reading a long log and pointing at the interesting line.
+
+They are much weaker at deciding what should exist. Architecture, the boundary between two services, what to monitor, what not to build: those stay with me. The agent works best when I have already decided the shape and it fills it in.
+
+### Context is the real skill
+
+The single biggest difference between a useful session and a frustrating one is context. A short project file that says how to build, test and deploy, what the house rules are, and what went wrong last time, saves more time than any prompt trick. When an agent repeats a mistake, the fix is usually to write the lesson down where it will be read next time, not to correct it again in chat.
+
+### Guardrails for infrastructure work
+
+Infrastructure is where an agent's confidence is most dangerous, because the blast radius is real. The rules I hold to:
+
+- **Nothing irreversible without a human.** Deleting data, force-pushing, touching production: the agent proposes, I approve.
+- **Tests before trust.** A change is not done because the agent says so; it is done when the tests and the health check say so.
+- **Verify every "does not exist".** Agents and review bots will tell you a function is missing or a file is unused. Check before you act on it.
+- **Deploy from one place.** Many agents working at once on one codebase need the same discipline as many people: branches, commits, and one blessed path to production.
+
+### Where it changed my work most
+
+The surprise was not speed on big features. It was how much small, useful work now gets done that never would have: the internal tool that saves ten minutes a day, the migration script with proper tests, the dashboard nobody had time for. The cost of "it would be nice if" dropped close to zero.
+
+### What this means for hiring
+
+If engineers work like this, interviews should let them. That is a large part of why EasyEnv lets candidates use AI and records the whole session: the skill worth measuring now is how well someone directs and checks the machine, not whether they can type the answer from memory. I wrote more about that in [Hiring engineers when AI is in the room](https://efazati.org/blog/hiring-engineers-when-ai-is-in-the-room/).
+
+Want to talk about bringing AI agents into your team's infrastructure work safely? [Book a call](https://app.reclaim.ai/m/efazati).
+
+---
+
+## The first 30 days with an unfamiliar infrastructure
+
+URL: https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/  
+Published: 2026-11-17 · Topic: Platform
+
+_How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins._
+
+I have joined a lot of infrastructures that someone else built. Banks, payment companies, edge platforms, startups with one server and a prayer. The details change every time, but the first month looks surprisingly similar, and getting it right matters more than anything clever I do later.
+
+### Week one: map it, do not fix it
+
+The temptation on day one is to spot something ugly and clean it up. Resist it. Every odd thing in a working system is there for a reason, and until you know the reason you cannot tell a scar from a bug.
+
+Instead I build a map:
+
+- **What runs where.** Clusters, VMs, managed services, the box under someone's desk that turns out to run payroll.
+- **How code reaches production.** Every pipeline, every manual step, every "ask Dave".
+- **Where the state lives.** Databases, buckets, queues, and who restores them when they break.
+- **Who gets woken up,** and for what.
+
+The map is usually wrong in places the first time. That is fine. The act of drawing it is what makes the questions obvious.
+
+### Week two: follow the pain
+
+Every team has a short list of things that hurt every week. Flaky deploys, a CI queue that takes forty minutes, an alert that fires every night and gets ignored. I read the incident history, sit in on on-call handovers and ask one question of everyone: _what do you wish you never had to do again?_
+
+The answers are almost never what leadership thinks the problem is. They are also where trust comes from.
+
+### Week three: one small, visible win
+
+Pick something from that list that is annoying, well understood and fixable in a few days. Fix it properly, with monitoring and a short write-up, and make sure the people who suffered from it notice.
+
+At Clover that kind of win was making Jenkins boring: autoscaling agents, high availability and a tighter security model, so builds stopped being the thing everyone complained about. It is not glamorous. It buys the credibility you need for the bigger changes.
+
+### Week four: write the plan down
+
+By now I know enough to write a short plan: what we keep, what we change, in what order, and what each step makes measurably better. I separate run-the-business work from project work so the team can see both, and so the urgent never quietly eats the important.
+
+A good plan is mostly a list of things we are deliberately _not_ doing yet.
+
+### What I avoid
+
+- **Rewriting on arrival.** A rewrite throws away years of fixed edge cases you have not met yet.
+- **Tool-first thinking.** "We should move to X" is not a plan until you can say what problem X solves here.
+- **Heroics.** If the fix only works while I am around, it is not a fix.
+
+The goal of the first month is not to change much. It is to understand enough that the changes after it are the right ones, and to have the team on side when they happen.
+
+If you have a platform that needs this kind of attention, [book a call](https://app.reclaim.ai/m/efazati) and tell me about it.
+
+---
+
+## Broken on purpose: designing interview challenges that feel like the job
+
+URL: https://efazati.org/blog/broken-on-purpose/  
+Published: 2026-11-17 · Topic: EasyEnv
+
+_How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one._
+
+The best way I know to see how an infrastructure engineer works is to give them a machine that is broken and watch them fix it. At [EasyEnv](https://easyenv.io/) we build those machines as code: more than fifty Ansible recipes that set up anything from a single Nginx box to a Kubernetes cluster with an ELK stack and monitoring, many of them broken on purpose.
+
+Building a good broken machine is harder than it sounds. Here is what we have learned.
+
+### It has to be believable
+
+The failure should be one the candidate could meet in real life. A service that will not start because its config points at a socket that moved. A disk filled by logs nobody rotates. A certificate that expired on Friday. A Kubernetes pod stuck because a resource limit is set in the wrong unit.
+
+Artificial puzzles (a file hidden in a weird place, a riddle in a comment) test patience, not skill. Real failures test exactly what you will pay them to do.
+
+### It has to be reproducible
+
+Every candidate for a role should get the same problem. That rules out "break it by hand before the interview". Each challenge is an Ansible recipe: it builds a clean machine, then applies the breakage as a final, deliberate step. The same recipe gives the same machine every time, and a fix for the recipe is a pull request like any other.
+
+Building on recipes also means the healthy version and the broken version share almost everything, which makes the challenge easy to maintain when a distribution or package version moves on.
+
+### It needs more than one way in
+
+A good challenge does not have a single magic command. One candidate starts with `journalctl`, another with `ss -ltnp`, a third reads the config first. All of them can get there. What you learn is how each one thinks, and that is only visible when the path is theirs.
+
+### It needs a clear definition of fixed
+
+"Make the site work" is not enough, because a candidate can make the symptom disappear without fixing the cause. Each challenge comes with a check that proves the system is healthy, and the interesting part of the review is often the gap between "the error went away" and "it is actually fixed".
+
+### AI does not make it easier, and that is the point
+
+Candidates on EasyEnv can use AI, as they would at work. A model can suggest commands, but it cannot see the machine. The candidate still has to look, decide what matters, and judge whether the suggestion fits what they see. Broken-on-purpose challenges turn out to be one of the clearest ways to tell an engineer who directs the AI from one who follows it.
+
+### What a good challenge looks like
+
+- A real failure, in a real stack the role uses.
+- Built entirely from a recipe, so every candidate gets the same machine.
+- Several reasonable starting points.
+- A check that proves the fix, not just the absence of an error.
+- Small enough to solve in the time you give, deep enough to show judgement.
+
+Curious what this looks like for your roles? [Try EasyEnv](https://easyenv.io/) or [book a demo with me](https://app.reclaim.ai/m/efazati).
+
+---
+
+## Kubernetes at the edge, on x86 and ARM
+
+URL: https://efazati.org/blog/kubernetes-at-the-edge-on-x86-and-arm/  
+Published: 2026-11-17 · Topic: Kubernetes
+
+_Lessons from running a 100+ node Kubernetes cluster that spanned cloud servers, NVIDIA Jetsons and Raspberry Pis: multi-arch images, flaky links and installs as code._
+
+At Cainthus I helped build a hybrid platform: part cloud, part edge, one Kubernetes cluster of more than a hundred nodes that mixed x86 servers with ARM boards like the NVIDIA Jetson and the Raspberry Pi. The goal was simple to say and hard to do: every team should be able to ship to any of those machines on their own, the same way.
+
+Here is what that taught me.
+
+### Multi-arch is a build problem, not a cluster problem
+
+Kubernetes is happy to schedule onto ARM. The trouble starts earlier, in the image. If a team builds only for `amd64`, the pod lands on a Jetson and fails with an `exec format error` that nobody understands at first sight.
+
+The fix belongs in CI. Every image is built as a multi-arch manifest, so the same tag works everywhere and the node pulls the variant it can run:
+
+```
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t registry.example/app:1.4.2 --push .
+```
+
+Where a workload genuinely needs one architecture (a GPU model built for the Jetson, say), say so explicitly with a node selector on `kubernetes.io/arch` rather than hoping the scheduler guesses.
+
+### The network will go away. Plan for it.
+
+Edge nodes live on links you do not control. They drop, they get slow, they come back with a different address. A design that assumes the control plane is always reachable will spend its life in alert storms.
+
+- Keep workloads at the edge able to run on their own for a while: local buffering, retries with backoff, nothing that blocks on a round trip to the cloud.
+- Tune node failure timeouts so a short drop does not evict and reschedule everything.
+- Treat the VPN as production infrastructure. We automated the OpenVPN deployment, its monitoring, central user management and high availability, because when it broke, everything broke.
+
+### Installs as code, all the way down
+
+With a few nodes you can get away with a runbook. With a hundred, across hardware types, every hand-run step becomes a node that is subtly different from its neighbours. We built the whole Kubernetes installation pipeline as code, from a bare board to a ready node, with Ansible and Terraform, so a new device was a pipeline run rather than an afternoon.
+
+The payoff is not speed. It is that when something is wrong, you can rebuild the node instead of debugging it.
+
+### Give teams a wrapper, not a cluster
+
+Most product engineers did not want to learn Kubernetes and AWS in depth, and they should not have to. We wrote a thin wrapper, an API and a CLI, with access control and CI/CD built in. Teams described what they wanted to run; the wrapper turned it into the right objects in the right place.
+
+That wrapper was the real product of the platform team. The cluster was just where it ran.
+
+### What I would tell someone starting today
+
+- Make multi-arch builds the default before the first ARM node joins.
+- Decide what happens when the edge is offline, and test it by pulling the cable.
+- Never configure a node by hand, not even once.
+- Build the paved road for teams early; it is what makes the platform worth having.
+
+If you are working on something similar, I would enjoy hearing about it. [Book a call](https://app.reclaim.ai/m/efazati).
+
+---
+
+## OpenTelemetry before the vendor
+
+URL: https://efazati.org/blog/opentelemetry-before-the-vendor/  
+Published: 2026-11-17 · Topic: Observability
+
+_Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank._
+
+At Royal Bank of Canada I led a small team building an internal developer platform. The people using it were quant developers: very good at their own work, and with no interest in learning Jenkins, Kubernetes or HTTP plumbing. The platform's job was to let them ship to production without touching any of it.
+
+One of the first decisions was how services would report what they were doing. We chose OpenTelemetry, before choosing where the data would go. I would make the same choice again anywhere.
+
+### Instrumentation outlives backends
+
+Instrumenting a codebase is expensive. It touches every service, every library, every team. Backends, on the other hand, change: a contract ends, a new tool is cheaper, a team inherits a different stack after a reorganisation.
+
+If your traces and metrics are written against one vendor's SDK, switching vendors means re-instrumenting everything. If they are written against OpenTelemetry, switching is a collector config change.
+
+```
+exporters:
+  otlp/tempo:
+    endpoint: tempo:4317
+  prometheus:
+    endpoint: 0.0.0.0:8889
+service:
+  pipelines:
+    traces:  { receivers: [otlp], exporters: [otlp/tempo] }
+    metrics: { receivers: [otlp], exporters: [prometheus] }
+```
+
+That separation is the whole point. Code says what happened. The collector decides where it goes.
+
+### Make it the default, not a task
+
+On a platform, observability only works if it is already there when a developer arrives. We baked it into the developer environment and the project scaffolding, so a new service came with tracing, metrics and sensible resource attributes from its first commit. Nobody had to read a wiki page to be observable.
+
+The same applied underneath: we ran our own Prometheus cluster and built custom Linux containers on OpenShift as Jenkins agents, so the build and runtime sides told the same story.
+
+### Things that matter more than the tool
+
+- **Consistent service names and attributes.** A trace that crosses five services is useless if each one names itself differently.
+- **Sampling decided on purpose.** Keep every error and slow request; sample the boring successes.
+- **Dashboards that answer a question.** "Is checkout slower than yesterday?" beats forty panels of CPU graphs.
+- **Alerts on symptoms, not causes.** Page on users seeing errors, not on a node's memory at 80%.
+
+### The stack I reach for
+
+When I get to choose, it is usually OpenTelemetry for instrumentation, Prometheus for metrics, Loki for logs, Tempo for traces and Grafana on top. All open, all replaceable, and they work well together. But the real recommendation is the order: instrument with an open standard first, pick the backend second, and keep the two apart.
+
+Want a second opinion on your observability setup? [Book a call](https://app.reclaim.ai/m/efazati).
+
+---
+
+## One CI/CD for 200 projects
+
+URL: https://efazati.org/blog/one-ci-cd-for-200-projects/  
+Published: 2026-11-17 · Topic: CI/CD
+
+_Unifying build and deploy across 200+ projects at a payments company: a single SCM strategy, a Jenkins nobody has to worry about, and caching the outside world._
+
+At Clover, part of Fiserv, I owned reliability and capacity for the product's infrastructure, and later managed the EMEA DevOps team. One of the larger pieces of work was bringing more than 200 projects onto one way of building and deploying. Here is what made it work.
+
+### Start with the repository, not the pipeline
+
+Two hundred projects had grown two hundred habits: different branch names, different tagging, different ideas of what "release" means. You cannot write one pipeline for that. So the first step was a single SCM strategy: how branches are named, how versions are cut, what triggers a build and what triggers a deploy.
+
+Once every project agreed on those rules, the pipeline became a shared template with a few parameters, rather than two hundred bespoke scripts.
+
+### Make the CI server boring
+
+When the build server is unreliable, every team pays for it many times a day. We redesigned Jenkins with:
+
+- **Autoscaling agents,** so a busy morning did not mean a forty-minute queue, and a quiet night did not mean paying for idle machines.
+- **High availability,** so one controller failing was an event, not an outage.
+- **A hardened security model,** because a CI server holds the keys to production and should be treated that way.
+
+The best compliment a CI system gets is that nobody talks about it.
+
+### Environments people can trust
+
+We ran Dev Integration, Staging and QA tiers, and added ephemeral test environments alongside them: a short-lived copy of the stack for a single change, created when needed and destroyed after. Shared environments are where tests go to become flaky; ephemeral ones let a team prove their change without waiting for, or breaking, anyone else.
+
+### Cache the outside world
+
+A payments product talks to a lot of external services, and builds and tests pull a lot from the internet. Both are outside your control. We put an outbound caching layer in front of them, built on Squid, with health-checked traffic rotation written in Go, so a slow or failing upstream did not take our builds and environments down with it.
+
+It is a small piece of infrastructure that removes a whole category of "it failed for no reason" from everyone's day.
+
+### Process matters as much as tooling
+
+Alongside the technical work we changed how infrastructure work came in, separating run-the-business tasks from project work. Without that, the platform team spends its life on interrupts and the unification never finishes.
+
+### The short version
+
+- Agree on conventions before you write the shared pipeline.
+- Invest in the CI server until it is boring.
+- Give each change its own environment when you can.
+- Put a buffer between you and things you do not control.
+
+If your delivery pipeline has grown in every direction at once, I can help untangle it. [Book a call](https://app.reclaim.ai/m/efazati).
+
+---

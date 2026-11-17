@@ -1,0 +1,44 @@
+title: Broken on purpose: designing interview challenges that feel like the job
+date: 2026-11-17
+tag: EasyEnv
+description: How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.
+---
+<p>The best way I know to see how an infrastructure engineer works is to give them a machine that is broken and watch them fix it. At <a href="https://easyenv.io/">EasyEnv</a> we build those machines as code: more than fifty Ansible recipes that set up anything from a single Nginx box to a Kubernetes cluster with an ELK stack and monitoring, many of them broken on purpose.</p>
+
+<p>Building a good broken machine is harder than it sounds. Here is what we have learned.</p>
+
+<h2>It has to be believable</h2>
+
+<p>The failure should be one the candidate could meet in real life. A service that will not start because its config points at a socket that moved. A disk filled by logs nobody rotates. A certificate that expired on Friday. A Kubernetes pod stuck because a resource limit is set in the wrong unit.</p>
+
+<p>Artificial puzzles (a file hidden in a weird place, a riddle in a comment) test patience, not skill. Real failures test exactly what you will pay them to do.</p>
+
+<h2>It has to be reproducible</h2>
+
+<p>Every candidate for a role should get the same problem. That rules out "break it by hand before the interview". Each challenge is an Ansible recipe: it builds a clean machine, then applies the breakage as a final, deliberate step. The same recipe gives the same machine every time, and a fix for the recipe is a pull request like any other.</p>
+
+<p>Building on recipes also means the healthy version and the broken version share almost everything, which makes the challenge easy to maintain when a distribution or package version moves on.</p>
+
+<h2>It needs more than one way in</h2>
+
+<p>A good challenge does not have a single magic command. One candidate starts with <code>journalctl</code>, another with <code>ss -ltnp</code>, a third reads the config first. All of them can get there. What you learn is how each one thinks, and that is only visible when the path is theirs.</p>
+
+<h2>It needs a clear definition of fixed</h2>
+
+<p>"Make the site work" is not enough, because a candidate can make the symptom disappear without fixing the cause. Each challenge comes with a check that proves the system is healthy, and the interesting part of the review is often the gap between "the error went away" and "it is actually fixed".</p>
+
+<h2>AI does not make it easier, and that is the point</h2>
+
+<p>Candidates on EasyEnv can use AI, as they would at work. A model can suggest commands, but it cannot see the machine. The candidate still has to look, decide what matters, and judge whether the suggestion fits what they see. Broken-on-purpose challenges turn out to be one of the clearest ways to tell an engineer who directs the AI from one who follows it.</p>
+
+<h2>What a good challenge looks like</h2>
+
+<ul>
+<li>A real failure, in a real stack the role uses.</li>
+<li>Built entirely from a recipe, so every candidate gets the same machine.</li>
+<li>Several reasonable starting points.</li>
+<li>A check that proves the fix, not just the absence of an error.</li>
+<li>Small enough to solve in the time you give, deep enough to show judgement.</li>
+</ul>
+
+<p>Curious what this looks like for your roles? <a href="https://easyenv.io/">Try EasyEnv</a> or <a href="https://app.reclaim.ai/m/efazati">book a demo with me</a>.</p>

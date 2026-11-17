@@ -1,0 +1,53 @@
+title: Kubernetes at the edge, on x86 and ARM
+date: 2026-11-17
+tag: Kubernetes
+description: Lessons from running a 100+ node Kubernetes cluster that spanned cloud servers, NVIDIA Jetsons and Raspberry Pis: multi-arch images, flaky links and installs as code.
+---
+<p>At Cainthus I helped build a hybrid platform: part cloud, part edge, one Kubernetes cluster of more than a hundred nodes that mixed x86 servers with ARM boards like the NVIDIA Jetson and the Raspberry Pi. The goal was simple to say and hard to do: every team should be able to ship to any of those machines on their own, the same way.</p>
+
+<p>Here is what that taught me.</p>
+
+<h2>Multi-arch is a build problem, not a cluster problem</h2>
+
+<p>Kubernetes is happy to schedule onto ARM. The trouble starts earlier, in the image. If a team builds only for <code>amd64</code>, the pod lands on a Jetson and fails with an <code>exec format error</code> that nobody understands at first sight.</p>
+
+<p>The fix belongs in CI. Every image is built as a multi-arch manifest, so the same tag works everywhere and the node pulls the variant it can run:</p>
+
+<pre><code>docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t registry.example/app:1.4.2 --push .</code></pre>
+
+<p>Where a workload genuinely needs one architecture (a GPU model built for the Jetson, say), say so explicitly with a node selector on <code>kubernetes.io/arch</code> rather than hoping the scheduler guesses.</p>
+
+<h2>The network will go away. Plan for it.</h2>
+
+<p>Edge nodes live on links you do not control. They drop, they get slow, they come back with a different address. A design that assumes the control plane is always reachable will spend its life in alert storms.</p>
+
+<ul>
+<li>Keep workloads at the edge able to run on their own for a while: local buffering, retries with backoff, nothing that blocks on a round trip to the cloud.</li>
+<li>Tune node failure timeouts so a short drop does not evict and reschedule everything.</li>
+<li>Treat the VPN as production infrastructure. We automated the OpenVPN deployment, its monitoring, central user management and high availability, because when it broke, everything broke.</li>
+</ul>
+
+<h2>Installs as code, all the way down</h2>
+
+<p>With a few nodes you can get away with a runbook. With a hundred, across hardware types, every hand-run step becomes a node that is subtly different from its neighbours. We built the whole Kubernetes installation pipeline as code, from a bare board to a ready node, with Ansible and Terraform, so a new device was a pipeline run rather than an afternoon.</p>
+
+<p>The payoff is not speed. It is that when something is wrong, you can rebuild the node instead of debugging it.</p>
+
+<h2>Give teams a wrapper, not a cluster</h2>
+
+<p>Most product engineers did not want to learn Kubernetes and AWS in depth, and they should not have to. We wrote a thin wrapper, an API and a CLI, with access control and CI/CD built in. Teams described what they wanted to run; the wrapper turned it into the right objects in the right place.</p>
+
+<p>That wrapper was the real product of the platform team. The cluster was just where it ran.</p>
+
+<h2>What I would tell someone starting today</h2>
+
+<ol>
+<li>Make multi-arch builds the default before the first ARM node joins.</li>
+<li>Decide what happens when the edge is offline, and test it by pulling the cable.</li>
+<li>Never configure a node by hand, not even once.</li>
+<li>Build the paved road for teams early; it is what makes the platform worth having.</li>
+</ol>
+
+<p>If you are working on something similar, I would enjoy hearing about it. <a href="https://app.reclaim.ai/m/efazati">Book a call</a>.</p>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The first 30 days with an unfamiliar infrastructure | Mohammad Efazati</title>
+<meta name="description" content="How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.">
+<meta name="author" content="Mohammad Efazati">
+<link rel="canonical" href="https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#060914">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/">
+<meta property="og:title" content="The first 30 days with an unfamiliar infrastructure">
+<meta property="og:description" content="How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.">
+<meta property="og:image" content="https://efazati.org/assets/images/me.jpg">
+<meta property="og:site_name" content="Mohammad Efazati">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The first 30 days with an unfamiliar infrastructure">
+<meta name="twitter:description" content="How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.">
+<link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
+<link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"The first 30 days with an unfamiliar infrastructure","description":"How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.","datePublished":"2026-11-17","dateModified":"2026-11-17","url":"https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/","mainEntityOfPage":"https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/","image":"https://efazati.org/assets/images/me.jpg","author":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"},"publisher":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"}}
+</script>
+</head>
+<body>
+<div class="bg-fx" aria-hidden="true"></div>
+<header class="nav">
+    <div class="container nav-inner">
+        <a href="/" class="brand"><img src="/assets/images/me.webp" alt="" width="30" height="30">Mohammad Efazati</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+            <svg class="i-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+            <svg class="i-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/#capabilities">What I do</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/blog/" aria-current="page">Writing</a></li>
+            <li><a href="/#easyenv">EasyEnv</a></li>
+            <li class="nav-cta"><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
+<div class="nav-scrim" aria-hidden="true"></div>
+<main>
+<article class="article">
+    <div class="container">
+        <p class="crumbs"><a href="/">home</a> / <a href="/blog/">writing</a> / platform</p>
+        <h1>The first 30 days with an unfamiliar infrastructure</h1>
+        <p class="dek">How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.</p>
+        <div class="byline">
+            <img src="/assets/images/me.webp" alt="" width="40" height="40">
+            <div><b>Mohammad Efazati</b><time datetime="2026-11-17">17 Nov 2026</time> &middot; 2 min read</div>
+        </div>
+        <div class="prose">
+<p>I have joined a lot of infrastructures that someone else built. Banks, payment companies, edge platforms, startups with one server and a prayer. The details change every time, but the first month looks surprisingly similar, and getting it right matters more than anything clever I do later.</p>
+
+<h2>Week one: map it, do not fix it</h2>
+
+<p>The temptation on day one is to spot something ugly and clean it up. Resist it. Every odd thing in a working system is there for a reason, and until you know the reason you cannot tell a scar from a bug.</p>
+
+<p>Instead I build a map:</p>
+
+<ul>
+<li><strong>What runs where.</strong> Clusters, VMs, managed services, the box under someone's desk that turns out to run payroll.</li>
+<li><strong>How code reaches production.</strong> Every pipeline, every manual step, every "ask Dave".</li>
+<li><strong>Where the state lives.</strong> Databases, buckets, queues, and who restores them when they break.</li>
+<li><strong>Who gets woken up,</strong> and for what.</li>
+</ul>
+
+<p>The map is usually wrong in places the first time. That is fine. The act of drawing it is what makes the questions obvious.</p>
+
+<h2>Week two: follow the pain</h2>
+
+<p>Every team has a short list of things that hurt every week. Flaky deploys, a CI queue that takes forty minutes, an alert that fires every night and gets ignored. I read the incident history, sit in on on-call handovers and ask one question of everyone: <em>what do you wish you never had to do again?</em></p>
+
+<p>The answers are almost never what leadership thinks the problem is. They are also where trust comes from.</p>
+
+<h2>Week three: one small, visible win</h2>
+
+<p>Pick something from that list that is annoying, well understood and fixable in a few days. Fix it properly, with monitoring and a short write-up, and make sure the people who suffered from it notice.</p>
+
+<p>At Clover that kind of win was making Jenkins boring: autoscaling agents, high availability and a tighter security model, so builds stopped being the thing everyone complained about. It is not glamorous. It buys the credibility you need for the bigger changes.</p>
+
+<h2>Week four: write the plan down</h2>
+
+<p>By now I know enough to write a short plan: what we keep, what we change, in what order, and what each step makes measurably better. I separate run-the-business work from project work so the team can see both, and so the urgent never quietly eats the important.</p>
+
+<p>A good plan is mostly a list of things we are deliberately <em>not</em> doing yet.</p>
+
+<h2>What I avoid</h2>
+
+<ul>
+<li><strong>Rewriting on arrival.</strong> A rewrite throws away years of fixed edge cases you have not met yet.</li>
+<li><strong>Tool-first thinking.</strong> "We should move to X" is not a plan until you can say what problem X solves here.</li>
+<li><strong>Heroics.</strong> If the fix only works while I am around, it is not a fix.</li>
+</ul>
+
+<p>The goal of the first month is not to change much. It is to understand enough that the changes after it are the right ones, and to have the team on side when they happen.</p>
+
+<p>If you have a platform that needs this kind of attention, <a href="https://app.reclaim.ai/m/efazati">book a call</a> and tell me about it.</p>
+        </div>
+        <aside class="post-end">
+            <h3>Working on something like this?</h3>
+            <p>I help teams with platform engineering, Kubernetes, observability and technical hiring. Thirty minutes is usually enough to tell whether I can help.</p>
+            <div class="ctas">
+                <a class="btn btn-primary" href="https://app.reclaim.ai/m/efazati">Book a call</a>
+                <a class="btn btn-ghost" href="/#capabilities">What I do</a>
+            </div>
+        </aside>
+        <div class="more-posts">
+            <h3>// more writing</h3>
+            <div class="post-list">
+        <a class="post-row" href="/blog/hiring-engineers-when-ai-is-in-the-room/">
+            <div class="meta"><span class="tag">Hiring</span>17 Nov 2026 &middot; 3 min</div>
+            <div><h2>Hiring engineers when AI is in the room</h2><p>Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.</p></div>
+        </a>
+        <a class="post-row" href="/blog/engineering-with-claude-code/">
+            <div class="meta"><span class="tag">AI</span>17 Nov 2026 &middot; 2 min</div>
+            <div><h2>How I build with AI coding agents every day</h2><p>A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.</p></div>
+        </a>
+        <a class="post-row" href="/blog/broken-on-purpose/">
+            <div class="meta"><span class="tag">EasyEnv</span>17 Nov 2026 &middot; 2 min</div>
+            <div><h2>Broken on purpose: designing interview challenges that feel like the job</h2><p>How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.</p></div>
+        </a>
+            </div>
+        </div>
+    </div>
+</article>
+</main>
+<footer>
+    <div class="container foot">
+        <p style="margin:0">&copy; 2006 - 2026 Mohammad Efazati. Building <a href="https://easyenv.io/">EasyEnv</a> at <a href="https://donedeploy.com/">Donedeploy</a>.</p>
+        <nav aria-label="Footer">
+            <a href="/blog/">Writing</a>
+            <a href="/feed.xml">RSS</a>
+            <a href="/llms.txt">llms.txt</a>
+            <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+            <a href="https://github.com/efazati" rel="me">GitHub</a>
+        </nav>
+    </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
