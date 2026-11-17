@@ -106,24 +106,30 @@ footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wr
 footer nav { display: flex; gap: 20px; }
 footer a { text-decoration: none; }
 
-/* Now: EasyEnv large, Donedeploy beside it, then the other projects. */
-.feature { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #111113; margin-bottom: 16px; }
-.feature img { width: 100%; height: auto; border-bottom: 1px solid var(--line); }
-.feature-text { padding: 26px 28px 28px; }
-.feature h3, .dd h3 { font-size: 34px; letter-spacing: -.03em; font-weight: 800; margin: 6px 0 10px; }
-.feature p:not(.eyebrow), .dd p:not(.eyebrow) { color: var(--soft); margin: 0; max-width: 40em; }
-.feature .eyebrow, .dd .eyebrow { color: var(--accent); margin: 0; }
-.feature:hover h3, .dd:hover h3, .proj:hover b { color: var(--accent); }
-.dd { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; text-decoration: none; border: 1px solid var(--line); border-radius: 8px; padding: 26px 28px; background: #111113; }
-.dd h3 { font-size: 28px; }
-.dd img { width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); }
-.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 28px; }
-.proj { text-decoration: none; display: block; }
-.proj img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 16px; transition: transform .2s; }
-.proj:hover img { transform: translateY(-3px); }
-.proj b { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-.proj .url { color: var(--muted); font-size: 14px; margin-left: 10px; }
-.proj p { color: var(--muted); font-size: 15.5px; margin: 6px 0 0; }
+/* Now: EasyEnv large, Donedeploy under it, then the other projects as a
+   numbered list. Screenshots of the sites were tried and made the page look
+   cheaper; type carries it instead. */
+.feature, .dd { display: block; text-decoration: none; border-top: 1px solid var(--line); padding: 8px 0 36px; }
+.feature .eyebrow, .dd .eyebrow { color: var(--accent); margin: 18px 0 10px; }
+.feature h3 { font-size: clamp(44px, 6vw, 80px); line-height: .95; letter-spacing: -.045em; font-weight: 800; margin-bottom: 20px; }
+.dd h3 { font-size: clamp(32px, 4vw, 48px); line-height: 1; letter-spacing: -.04em; font-weight: 800; margin-bottom: 16px; }
+.arrow { font-weight: 400; color: var(--faint); font-size: .55em; vertical-align: .35em; transition: color .15s, transform .15s; display: inline-block; }
+.feature:hover .arrow, .dd:hover .arrow { color: var(--accent); transform: translate(3px, -3px); }
+.feature > p:not(.eyebrow) { font-size: 21px; line-height: 1.5; color: var(--soft); max-width: 34em; margin: 0; }
+.dd > p:not(.eyebrow) { color: var(--soft); max-width: 40em; margin: 0; }
+.facts { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.facts li { border-left: 2px solid var(--accent); padding: 2px 0 2px 14px; }
+.facts b { display: block; font-size: 17px; }
+.facts span { color: var(--muted); font-size: 14.5px; }
+.projects { list-style: none; margin: 0; padding: 0; }
+.projects li { border-top: 1px solid var(--line); }
+.projects li:last-child { border-bottom: 1px solid var(--line); }
+.projects a { display: grid; grid-template-columns: 56px 1fr auto; gap: 24px; align-items: baseline; padding: 26px 0; text-decoration: none; }
+.projects .n { color: var(--faint); font-size: 14px; font-variant-numeric: tabular-nums; }
+.projects b { font-size: clamp(24px, 2.6vw, 32px); font-weight: 800; letter-spacing: -.03em; }
+.projects p { color: var(--muted); margin: 6px 0 0; max-width: 36em; font-size: 16px; }
+.projects .url { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.projects a:hover b, .projects a:hover .url { color: var(--accent); }
 
 /* Blog index. */
 .page-head { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
@@ -179,10 +185,11 @@ footer a { text-decoration: none; }
     .row { grid-template-columns: 1fr; gap: 20px; padding: 52px 0; }
     .row > h2 { padding-top: 0; }
     .work { grid-template-columns: 1fr; }
-    .cards, .projects { grid-template-columns: 1fr; }
-    .dd { grid-template-columns: 1fr; padding: 22px; }
-    .feature-text { padding: 22px; }
-    .feature h3 { font-size: 28px; }
+    .cards { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr; gap: 12px; }
+    .feature > p:not(.eyebrow) { font-size: 18px; }
+    .projects a { grid-template-columns: 36px 1fr; gap: 6px 12px; padding: 22px 0; }
+    .projects .url { grid-column: 2; }
     .card { aspect-ratio: auto; min-height: 190px; }
     .card h3 { font-size: 24px; margin-top: 28px; }
     .jobs li { grid-template-columns: 1fr; gap: 2px; }
