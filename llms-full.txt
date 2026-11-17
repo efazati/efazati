@@ -91,7 +91,7 @@ A candidate who takes longer but verifies every step is usually a better hire th
 
 I wanted this kind of interview to be the easy option rather than a special effort. That is what [EasyEnv](https://easyenv.io/) does: interviews on real Linux machines in the browser, AI allowed, and a full replay of every terminal, editor and browser action so the team can review the process, not just the result.
 
-If you are rethinking how your team hires engineers, I am always happy to compare notes. [Grab thirty minutes on my calendar](https://app.reclaim.ai/m/efazati).
+If you are rethinking how your team hires engineers, I would like to hear what you are trying.
 
 ---
 
@@ -130,8 +130,6 @@ The surprise was not speed on big features. It was how much small, useful work n
 ### What this means for hiring
 
 If engineers work like this, interviews should let them. That is a large part of why EasyEnv lets candidates use AI and records the whole session: the skill worth measuring now is how well someone directs and checks the machine, not whether they can type the answer from memory. I wrote more about that in [Hiring engineers when AI is in the room](https://efazati.org/blog/hiring-engineers-when-ai-is-in-the-room/).
-
-Want to talk about bringing AI agents into your team's infrastructure work safely? [Book a call](https://app.reclaim.ai/m/efazati).
 
 ---
 
@@ -183,8 +181,6 @@ A good plan is mostly a list of things we are deliberately _not_ doing yet.
 
 The goal of the first month is not to change much. It is to understand enough that the changes after it are the right ones, and to have the team on side when they happen.
 
-If you have a platform that needs this kind of attention, [book a call](https://app.reclaim.ai/m/efazati) and tell me about it.
-
 ---
 
 ## Broken on purpose: designing interview challenges that feel like the job
@@ -230,7 +226,7 @@ Candidates on EasyEnv can use AI, as they would at work. A model can suggest com
 - A check that proves the fix, not just the absence of an error.
 - Small enough to solve in the time you give, deep enough to show judgement.
 
-Curious what this looks like for your roles? [Try EasyEnv](https://easyenv.io/) or [book a demo with me](https://app.reclaim.ai/m/efazati).
+Curious what this looks like in practice? [Try EasyEnv](https://easyenv.io/).
 
 ---
 
@@ -286,7 +282,7 @@ That wrapper was the real product of the platform team. The cluster was just whe
 - Never configure a node by hand, not even once.
 - Build the paved road for teams early; it is what makes the platform worth having.
 
-If you are working on something similar, I would enjoy hearing about it. [Book a call](https://app.reclaim.ai/m/efazati).
+If you are working on something similar, I would enjoy hearing about it.
 
 ---
 
@@ -338,8 +334,6 @@ The same applied underneath: we ran our own Prometheus cluster and built custom 
 
 When I get to choose, it is usually OpenTelemetry for instrumentation, Prometheus for metrics, Loki for logs, Tempo for traces and Grafana on top. All open, all replaceable, and they work well together. But the real recommendation is the order: instrument with an open standard first, pick the backend second, and keep the two apart.
 
-Want a second opinion on your observability setup? [Book a call](https://app.reclaim.ai/m/efazati).
-
 ---
 
 ## One CI/CD for 200 projects
@@ -387,7 +381,5 @@ Alongside the technical work we changed how infrastructure work came in, separat
 - Invest in the CI server until it is boring.
 - Give each change its own environment when you can.
 - Put a buffer between you and things you do not control.
-
-If your delivery pipeline has grown in every direction at once, I can help untangle it. [Book a call](https://app.reclaim.ai/m/efazati).
 
 ---

@@ -204,10 +204,10 @@ def build_post(p, posts):
         </div>
         <aside class="post-end">
             <h3>Working on something like this?</h3>
-            <p>I help teams with platform engineering, Kubernetes, observability and technical hiring. Thirty minutes is usually enough to tell whether I can help.</p>
+            <p>I am always happy to compare notes. Mail me or find me on LinkedIn.</p>
             <div class="ctas">
-                <a class="btn btn-primary" href="https://app.reclaim.ai/m/efazati">Book a call</a>
-                <a class="btn btn-ghost" href="/#capabilities">What I do</a>
+                <a class="btn btn-ghost" href="/#contact">Get in touch</a>
+                <a class="btn btn-ghost" href="/blog/">More writing</a>
             </div>
         </aside>
         <div class="more-posts">
