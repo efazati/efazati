@@ -8,8 +8,7 @@
 <meta name="author" content="Mohammad Efazati">
 <link rel="canonical" href="https://efazati.org/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b0b0c">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://efazati.org/">
 <meta property="og:site_name" content="Mohammad Efazati">
@@ -26,6 +25,9 @@
 <link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
 <link rel="apple-touch-icon" href="/assets/images/me.jpg">
 <link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script type="application/ld+json">
 {
@@ -58,108 +60,120 @@
 </script>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-    <a class="name" href="/">Mohammad Efazati</a>
-    <nav aria-label="Primary">
-        <a href="/#about">About</a>
-        <a href="/blog/">Writing</a>
-        <a href="/#contact">Contact</a>
-    </nav>
-</header>
-
-<main>
-    <div class="intro" id="about">
+<header class="hero">
+    <div class="top">
+        <a class="name" href="/">Efazati</a>
+        <nav aria-label="Primary">
+            <a href="/#about">About</a>
+            <a href="/blog/">Writing</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+    </div>
+    <div class="photo">
         <picture>
             <source srcset="/assets/images/me.avif" type="image/avif">
             <source srcset="/assets/images/me.webp" type="image/webp">
-            <img src="/assets/images/me.jpg" alt="Mohammad Efazati" width="76" height="76">
+            <img src="/assets/images/me.jpg" alt="Mohammad Efazati" width="600" height="400">
         </picture>
+        <span class="where">Tullamore, Ireland</span>
+    </div>
+    <div class="text">
+        <p class="eyebrow role">DevOps and platform engineering</p>
+        <h1>Mohammad<br>Efazati</h1>
+        <p class="lede">I have run production infrastructure since 2007: payments at Clover, a developer platform at Royal Bank of Canada, Kubernetes out to ARM boards at Cainthus. Now I am building <a href="https://easyenv.io/">EasyEnv</a>, where engineers are interviewed on real Linux machines.</p>
+    </div>
+</header>
+
+<main class="w">
+    <section class="row about" id="about" aria-labelledby="about-h">
+        <h2 class="eyebrow" id="about-h">About</h2>
         <div>
-            <h1>Mohammad Efazati</h1>
-            <p class="role">Principal DevOps Engineer &middot; Tullamore, Ireland</p>
+            <p class="big">Most of my work is the part nobody notices when it goes well: one pipeline for <em>two hundred projects</em> at Clover, a platform quant developers build on at <em>RBC</em>, a cluster of a hundred nodes that ran on cloud servers, Jetsons and <em>Raspberry Pis</em>.</p>
+            <p>Before Ireland I co-founded Cvas in Tehran, grew its engineering team to thirty and took it through an acquisition, and helped start IrPycon and TehranLUG. After thousands of technical interviews I co-founded EasyEnv at <a href="https://donedeploy.com/">Donedeploy</a>: a real machine, AI allowed, and the whole session there to review, because that is what the job looks like now.</p>
         </div>
-    </div>
+    </section>
 
-    <div class="bio">
-        <p>I build infrastructure that keeps working when nobody is watching, and the teams that run it. I have been doing it since 2007, across more than fifty companies: payments at <a href="https://www.clover.com/">Clover</a>, an internal developer platform for quant developers at <a href="https://www.rbc.com/">Royal Bank of Canada</a>, and a Kubernetes cluster of a hundred-odd nodes that ran from the cloud to ARM boards at the edge at Cainthus.</p>
-        <p>I am currently co-founding <a href="https://easyenv.io/">EasyEnv</a> at <a href="https://donedeploy.com/">Donedeploy</a>. After running thousands of technical interviews I wanted one that looks like the job: a real Linux machine, AI allowed, and the whole session to review afterwards.</p>
-        <p>Before Ireland I co-founded Cvas in Tehran and led its engineering team of thirty through an acquisition, and started IrPycon and TehranLUG, two communities I still care about. I <a href="/blog/">write</a> about infrastructure and hiring.</p>
-    </div>
-
-    <section class="block" aria-labelledby="work-h">
-        <h2 class="label" id="work-h">What I work on</h2>
+    <section class="row" aria-labelledby="work-h">
+        <h2 class="eyebrow" id="work-h">What I work on</h2>
         <dl class="work">
-            <div><dt>Platforms</dt><dd>Paved roads so product teams ship without learning the plumbing. <span class="where">RBC, Cainthus.</span></dd></div>
-            <div><dt>Kubernetes &amp; cloud</dt><dd>Clusters on AWS, GCP, Hetzner, bare metal and the edge, x86 and ARM alike. <span class="where">Cainthus, EasyEnv.</span></dd></div>
-            <div><dt>Infrastructure as code</dt><dd>Terraform, Ansible, Puppet, Packer; nothing configured by hand. <span class="where">58+ recipes at EasyEnv.</span></dd></div>
-            <div><dt>CI/CD</dt><dd>One pipeline for many teams, and a build server nobody worries about. <span class="where">200+ projects at Clover.</span></dd></div>
-            <div><dt>Observability</dt><dd>OpenTelemetry first, then Prometheus, Grafana, Loki and Tempo. <span class="where">RBC, ARGUS.</span></dd></div>
-            <div><dt>Hiring engineers</dt><dd>Interviews on real machines, with AI in the room. <span class="where">EasyEnv.</span></dd></div>
-            <div><dt>Leading teams</dt><dd>From five engineers to thirty, and the intake that keeps firefighting off the roadmap. <span class="where">Cvas, Clover, RBC.</span></dd></div>
+            <div><dt>Platforms</dt><dd>Paved roads, so product teams ship without learning the plumbing.</dd></div>
+            <div><dt>Kubernetes and cloud</dt><dd>AWS, GCP, Hetzner, bare metal and the edge, x86 and ARM.</dd></div>
+            <div><dt>Infrastructure as code</dt><dd>Terraform, Ansible, Puppet, Packer. Nothing set up by hand.</dd></div>
+            <div><dt>CI/CD</dt><dd>One delivery path for many teams, and a build server nobody worries about.</dd></div>
+            <div><dt>Observability</dt><dd>OpenTelemetry first, then Prometheus, Grafana, Loki and Tempo.</dd></div>
+            <div><dt>Hiring and teams</dt><dd>Interviews that look like the job, and teams of five to thirty.</dd></div>
         </dl>
     </section>
 
-    <section class="block" aria-labelledby="writing-h">
-        <h2 class="label" id="writing-h">Writing</h2>
-        <ul class="list">
+    <section class="row" aria-labelledby="writing-h">
+        <h2 class="eyebrow" id="writing-h">Writing</h2>
+        <div>
         <!-- posts:start -->
-        <li><a href="/blog/hiring-engineers-when-ai-is-in-the-room/">Hiring engineers when AI is in the room</a><span class="side">Hiring</span></li>
-        <li><a href="/blog/engineering-with-claude-code/">How I build with AI coding agents every day</a><span class="side">AI</span></li>
-        <li><a href="/blog/first-30-days-with-an-unfamiliar-infrastructure/">The first 30 days with an unfamiliar infrastructure</a><span class="side">Platform</span></li>
-        <li><a href="/blog/broken-on-purpose/">Broken on purpose: designing interview challenges that feel like the job</a><span class="side">EasyEnv</span></li>
-        <li><a href="/blog/kubernetes-at-the-edge-on-x86-and-arm/">Kubernetes at the edge, on x86 and ARM</a><span class="side">Kubernetes</span></li>
-        <!-- posts:end -->
-        </ul>
-        <p class="more"><a href="/blog/">All writing</a></p>
-    </section>
-
-    <section class="block" aria-labelledby="exp-h">
-        <h2 class="label" id="exp-h">Experience</h2>
-        <ul class="jobs">
-            <li><span class="when">2023 &ndash; now</span><span class="what"><b>EasyEnv</b>, co-founder <span>at Donedeploy</span></span></li>
-            <li><span class="when">2022 &ndash; 2023</span><span class="what"><b>Royal Bank of Canada</b>, Principal DevOps Engineer <span>via Manakau</span></span></li>
-            <li><span class="when">2020 &ndash; 2022</span><span class="what"><b>Clover, Fiserv</b>, EMEA DevOps Engineering Manager, Staff DevOps Engineer</span></li>
-            <li><span class="when">2018 &ndash; 2020</span><span class="what"><b>Cainthus</b>, Senior DevOps Engineer</span></li>
-            <li><span class="when">2017 &ndash; 2018</span><span class="what"><b>Noavaran Saramad Sharif</b>, DevOps Tech Lead</span></li>
-            <li><span class="when">2013 &ndash; 2017</span><span class="what"><b>Cvas, then AEC</b>, co-founder and engineering director</span></li>
-            <li><span class="when">2007 &ndash; 2013</span><span class="what"><b>Bayan</b> and freelance, software engineer</span></li>
-        </ul>
-        <p class="more"><a href="/assets/Mohammad-Efazati-CV.pdf">Full CV (PDF)</a></p>
-    </section>
-
-    <section class="block" aria-labelledby="oss-h">
-        <h2 class="label" id="oss-h">Open source</h2>
+        <div class="cards"><a class="card c1" href="/blog/hiring-engineers-when-ai-is-in-the-room/"><span class="t">Hiring</span><div><h3>Hiring engineers when AI is in the room</h3><p>Banning AI tests a job that no longer exists.</p></div></a><a class="card c2" href="/blog/engineering-with-claude-code/"><span class="t">AI</span><div><h3>How I build with AI coding agents every day</h3><p>What I hand to an agent, and what I keep.</p></div></a><a class="card c3" href="/blog/first-30-days-with-an-unfamiliar-infrastructure/"><span class="t">Platform</span><div><h3>The first 30 days with an unfamiliar infrastructure</h3><p>Map it before you touch it.</p></div></a></div>
         <ul class="list">
-            <li><a href="https://github.com/efazati/i3buntu">i3buntu</a><span class="side">a minimal i3 desktop for Ubuntu</span></li>
-            <li><a href="https://github.com/efazati/samwise">samwise</a><span class="side">AI text transforms on a hotkey</span></li>
-            <li><a href="https://github.com/efazati/tripadvisor-crawler">tripadvisor-crawler</a><span class="side">travel research as KML</span></li>
-            <li><a href="https://github.com/efazati/dots">dots</a><span class="side">dotfiles</span></li>
+            <li><a href="/blog/broken-on-purpose/"><b>Broken on purpose: designing interview challenges that feel like the job</b><span>EasyEnv</span></a></li>
+            <li><a href="/blog/kubernetes-at-the-edge-on-x86-and-arm/"><b>Kubernetes at the edge, on x86 and ARM</b><span>Kubernetes</span></a></li>
+            <li><a href="/blog/opentelemetry-before-the-vendor/"><b>OpenTelemetry before the vendor</b><span>Observability</span></a></li>
+            <li><a href="/blog/one-ci-cd-for-200-projects/"><b>One CI/CD for 200 projects</b><span>CI/CD</span></a></li>
         </ul>
-        <p class="more"><a href="https://github.com/efazati" rel="me">More on GitHub</a></p>
+        <!-- posts:end -->
+            <p class="more"><a href="/blog/">All writing</a> &middot; <a href="/feed.xml">RSS</a></p>
+        </div>
     </section>
 
-    <section class="block" id="contact" aria-labelledby="contact-h">
-        <h2 class="label" id="contact-h">Contact</h2>
-        <p>I like hearing about hard infrastructure and hiring problems, whether it needs a second opinion or someone to build it with. Email is best: <a href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>. If you would rather talk, <a href="https://app.reclaim.ai/m/efazati">pick a time</a>.</p>
-        <div class="elsewhere">
+    <section class="row" aria-labelledby="exp-h">
+        <h2 class="eyebrow" id="exp-h">Experience</h2>
+        <div>
+            <ul class="jobs">
+                <li><span class="when">2023 &ndash; now</span><b>EasyEnv</b><span class="what">Co-founder, at Donedeploy</span></li>
+                <li><span class="when">2022 &ndash; 2023</span><b>Royal Bank of Canada</b><span class="what">Principal DevOps Engineer</span></li>
+                <li><span class="when">2020 &ndash; 2022</span><b>Clover, Fiserv</b><span class="what">EMEA DevOps Engineering Manager</span></li>
+                <li><span class="when">2018 &ndash; 2020</span><b>Cainthus</b><span class="what">Senior DevOps Engineer</span></li>
+                <li><span class="when">2017 &ndash; 2018</span><b>Noavaran Saramad Sharif</b><span class="what">DevOps Tech Lead</span></li>
+                <li><span class="when">2013 &ndash; 2017</span><b>Cvas, then AEC</b><span class="what">Co-founder, engineering director</span></li>
+                <li><span class="when">2007 &ndash; 2013</span><b>Bayan and freelance</b><span class="what">Software engineer</span></li>
+            </ul>
+            <p class="more"><a href="/assets/Mohammad-Efazati-CV.pdf">Full CV (PDF)</a></p>
+        </div>
+    </section>
+
+    <section class="row" aria-labelledby="oss-h">
+        <h2 class="eyebrow" id="oss-h">Open source</h2>
+        <div>
+            <ul class="list">
+                <li><a href="https://github.com/efazati/i3buntu"><b>i3buntu</b><span>A minimal i3 desktop for Ubuntu</span></a></li>
+                <li><a href="https://github.com/efazati/samwise"><b>samwise</b><span>AI text transforms on a hotkey</span></a></li>
+                <li><a href="https://github.com/efazati/tripadvisor-crawler"><b>tripadvisor-crawler</b><span>Travel research as KML</span></a></li>
+                <li><a href="https://github.com/efazati/dots"><b>dots</b><span>Dotfiles</span></a></li>
+            </ul>
+            <p class="more"><a href="https://github.com/efazati" rel="me">More on GitHub</a></p>
+        </div>
+    </section>
+
+    <section class="end" id="contact" aria-labelledby="contact-h">
+        <h2 id="contact-h">Say <a href="mailto:mohammad@efazati.org">hello.</a></h2>
+        <p>A hard infrastructure problem, a platform that could use a second look, or something you would like built: I am always happy to hear about it.</p>
+        <div class="links">
+            <a class="mail" href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>
+            <a href="https://app.reclaim.ai/m/efazati">Pick a time</a>
             <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
             <a href="https://github.com/efazati" rel="me">GitHub</a>
             <a href="https://stackoverflow.com/users/471397/mohammad-efazati" rel="me">Stack Overflow</a>
-            <a href="https://www.goodreads.com/user/show/5387467-mohammad-efazati">Goodreads</a>
         </div>
     </section>
+
 </main>
 
+<div class="w">
 <footer>
-    <span>&copy; 2026 Mohammad Efazati</span>
-    <nav aria-label="Footer">
-        <a href="/feed.xml">RSS</a>
-        <a href="/llms.txt">llms.txt</a>
-        <a href="https://github.com/efazati" rel="me">GitHub</a>
-        <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
-    </nav>
-</footer>
+        <span>&copy; 2026 Mohammad Efazati</span>
+        <nav aria-label="Footer">
+            <a href="/feed.xml">RSS</a>
+            <a href="/llms.txt">llms.txt</a>
+            <a href="https://github.com/efazati" rel="me">GitHub</a>
+            <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+        </nav>
+    </footer>
 </div>
 </body>
 </html>

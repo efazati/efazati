@@ -73,8 +73,7 @@ HEAD = """<!DOCTYPE html>
 <meta name="author" content="Mohammad Efazati">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b0b0c">
 <meta property="og:type" content="{ogtype}">
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{ogtitle}">
@@ -86,16 +85,20 @@ HEAD = """<!DOCTYPE html>
 <meta name="twitter:description" content="{desc}">
 <link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
 <link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css">
 {ld}
 </head>
 <body>
-<div class="wrap">
+<div class="w">
 """
 
-# Kept identical to the header in index.html, which is hand-written.
+# Kept identical to the header in index.html, which is hand-written (there it
+# sits inside the hero, next to the photo).
 TOP = """<header class="top">
-    <a class="name" href="/">Mohammad Efazati</a>
+    <a class="name" href="/">Efazati</a>
     <nav aria-label="Primary">
         <a href="/#about">About</a>
         <a href="/blog/"{blog_current}>Writing</a>
@@ -129,19 +132,29 @@ def page(title, ogtitle, desc, url, body, ogtype="website", ld="", blog_current=
 
 
 def item(p):
-    return f"""    <li><a href="{p['path']}">{E(p['title'])}</a><p>{E(p['description'])}</p><div class="meta">{nice_date(p['date'])} &middot; {E(p['tag'])} &middot; {p['minutes']} min</div></li>
+    return f"""    <li><a href="{p['path']}"><div class="meta"><b>{E(p['tag'])}</b>{nice_date(p['date'])} &middot; {p['minutes']} min</div><div><h2>{E(p['title'])}</h2><p>{E(p['description'])}</p></div></a></li>
 """
 
 
 def short(p):
-    return f"""    <li><a href="{p['path']}">{E(p['title'])}</a><span class="side">{E(p['tag'])}</span></li>
+    return f"""    <li><a href="{p['path']}"><b>{E(p['title'])}</b><span>{E(p['tag'])}</span></a></li>
 """
+
+
+def card(p, n):
+    # The home page leads with three posts as coloured cards. The description
+    # is written for search results and is too long for a card, so each post
+    # carries a one-line teaser of its own.
+    lead = p.get("teaser") or p["description"]
+    return f"""<a class="card c{n}" href="{p['path']}"><span class="t">{E(p['tag'])}</span><div><h3>{E(p['title'])}</h3><p>{E(lead)}</p></div></a>"""
 
 
 def build_blog_index(posts):
     body = f"""<main>
-<h1 class="page-title">Writing</h1>
-<p class="page-sub">Notes on platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have done.</p>
+<div class="page-head">
+<h1>Writing</h1>
+<p>Notes on platforms, Kubernetes, observability, CI/CD, and hiring engineers now that AI is part of the job. Written from work I have done.</p>
+</div>
 <ul class="posts">
 {''.join(item(p) for p in posts)}</ul>
 </main>
@@ -175,15 +188,16 @@ def build_post(p, posts):
     )
     body = f"""<main>
 <article class="article">
+    <p class="eyebrow kicker">{E(p['tag'])}</p>
     <h1>{E(p['title'])}</h1>
-    <p class="meta"><time datetime="{p['date']}">{nice_date(p['date'])}</time> &middot; {E(p['tag'])} &middot; {p['minutes']} min read</p>
+    <p class="meta">Mohammad Efazati &middot; <time datetime="{p['date']}">{nice_date(p['date'])}</time> &middot; {p['minutes']} min read</p>
     <div class="prose">
 {p['body']}
     </div>
 </article>
 <div class="after">
     <p>Thoughts on this? I am happy to compare notes: <a href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>.</p>
-    <p class="label">More writing</p>
+    <p class="eyebrow">More writing</p>
     <ul class="list">
 {''.join(short(o) for o in others)}    </ul>
 </div>
@@ -209,7 +223,12 @@ def json_str(s):
 
 def build_home_cards(posts):
     """Fill the Writing list of index.html between its markers."""
-    rows = "".join("        " + short(p).strip() + "\n" for p in posts[:5])
+    cards = "".join(card(p, n) for n, p in enumerate(posts[:3], 1))
+    rest = "".join("            " + short(p).strip() + "\n" for p in posts[3:])
+    rows = f"""        <div class="cards">{cards}</div>
+        <ul class="list">
+{rest}        </ul>
+"""
     idx = ROOT / "index.html"
     text = idx.read_text()
     new, n = re.subn(
