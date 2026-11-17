@@ -106,30 +106,46 @@ footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wr
 footer nav { display: flex; gap: 20px; }
 footer a { text-decoration: none; }
 
-/* Now: EasyEnv large, Donedeploy under it, then the other projects as a
-   numbered list. Screenshots of the sites were tried and made the page look
-   cheaper; type carries it instead. */
-.feature, .dd { display: block; text-decoration: none; border-top: 1px solid var(--line); padding: 8px 0 36px; }
-.feature .eyebrow, .dd .eyebrow { color: var(--accent); margin: 18px 0 10px; }
-.feature h3 { font-size: clamp(44px, 6vw, 80px); line-height: .95; letter-spacing: -.045em; font-weight: 800; margin-bottom: 20px; }
-.dd h3 { font-size: clamp(32px, 4vw, 48px); line-height: 1; letter-spacing: -.04em; font-weight: 800; margin-bottom: 16px; }
-.arrow { font-weight: 400; color: var(--faint); font-size: .55em; vertical-align: .35em; transition: color .15s, transform .15s; display: inline-block; }
-.feature:hover .arrow, .dd:hover .arrow { color: var(--accent); transform: translate(3px, -3px); }
-.feature > p:not(.eyebrow) { font-size: 21px; line-height: 1.5; color: var(--soft); max-width: 34em; margin: 0; }
-.dd > p:not(.eyebrow) { color: var(--soft); max-width: 40em; margin: 0; }
-.facts { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.facts li { border-left: 2px solid var(--accent); padding: 2px 0 2px 14px; }
-.facts b { display: block; font-size: 17px; }
-.facts span { color: var(--muted); font-size: 14.5px; }
-.projects { list-style: none; margin: 0; padding: 0; }
-.projects li { border-top: 1px solid var(--line); }
-.projects li:last-child { border-bottom: 1px solid var(--line); }
-.projects a { display: grid; grid-template-columns: 56px 1fr auto; gap: 24px; align-items: baseline; padding: 26px 0; text-decoration: none; }
-.projects .n { color: var(--faint); font-size: 14px; font-variant-numeric: tabular-nums; }
-.projects b { font-size: clamp(24px, 2.6vw, 32px); font-weight: 800; letter-spacing: -.03em; }
-.projects p { color: var(--muted); margin: 6px 0 0; max-width: 36em; font-size: 16px; }
-.projects .url { color: var(--muted); font-size: 14px; white-space: nowrap; }
-.projects a:hover b, .projects a:hover .url { color: var(--accent); }
+/* Now and Projects. Screenshots of the sites were tried and made the page
+   look cheaper, so these are solid panels in the same family as the writing
+   cards: EasyEnv in the one yellow, Donedeploy quiet beside it, and each
+   project a dark tile of its own colour. */
+.idx { display: block; color: var(--accent); font-size: 12px; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.row > h2.eyebrow { position: sticky; top: 24px; align-self: start; }
+.now-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; }
+.feature, .dd, .proj { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; text-decoration: none; border-radius: 8px; padding: 26px 28px 28px; transition: transform .2s, border-color .2s; }
+.feature:hover, .dd:hover, .proj:hover { transform: translateY(-3px); color: inherit; }
+.feature-top { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+.feature-top .go { letter-spacing: .02em; text-transform: none; font-size: 14px; font-weight: 600; }
+.feature { background: var(--accent); color: #111; }
+.feature .feature-top { color: rgba(17,17,17,.7); }
+.feature h3 { font-size: clamp(52px, 6.4vw, 92px); line-height: .9; letter-spacing: -.055em; font-weight: 800; margin-top: 24px; }
+.feature > p { font-size: 19px; line-height: 1.5; max-width: 30em; margin: 0; color: #1d1d1b; }
+.facts { list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid rgba(17,17,17,.25); display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.facts b { display: block; font-size: 16px; }
+.facts span { font-size: 14px; color: rgba(17,17,17,.7); }
+.dd { border: 1px solid var(--line); background: #121214; }
+.dd .feature-top { color: var(--muted); }
+.dd:hover { border-color: var(--faint); }
+.dd h3 { font-size: clamp(34px, 3.6vw, 48px); line-height: .95; letter-spacing: -.045em; font-weight: 800; margin-top: auto; }
+.dd p { color: var(--soft); margin: 0; font-size: 16px; }
+.dd:hover .go, .proj:hover .go { color: var(--accent); }
+
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.proj { min-height: 300px; border: 1px solid rgba(255,255,255,.06); }
+.proj .feature-top { color: rgba(255,255,255,.6); }
+.proj .go { font-size: 18px; }
+.proj b { display: block; font-size: clamp(30px, 3vw, 40px); line-height: 1; font-weight: 800; letter-spacing: -.045em; margin-bottom: 12px; color: #fff; }
+.proj p { margin: 0 0 18px; font-size: 15.5px; line-height: 1.5; color: rgba(255,255,255,.72); max-width: 30em; }
+.proj .url { font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.85); border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 1px; }
+.p1 { background: #13203a; }
+.p2 { background: #0f2e2a; }
+.p3 { background: #2a1838; }
+.p4 { background: #e8e1d3; border-color: transparent; }
+.p4 .feature-top { color: rgba(17,17,17,.6); }
+.p4 b { color: #111; }
+.p4 p { color: rgba(17,17,17,.75); }
+.p4 .url { color: #111; border-color: rgba(17,17,17,.35); }
 
 /* Blog index. */
 .page-head { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
@@ -185,11 +201,13 @@ footer a { text-decoration: none; }
     .row { grid-template-columns: 1fr; gap: 20px; padding: 52px 0; }
     .row > h2 { padding-top: 0; }
     .work { grid-template-columns: 1fr; }
-    .cards { grid-template-columns: 1fr; }
-    .facts { grid-template-columns: 1fr; gap: 12px; }
-    .feature > p:not(.eyebrow) { font-size: 18px; }
-    .projects a { grid-template-columns: 36px 1fr; gap: 6px 12px; padding: 22px 0; }
-    .projects .url { grid-column: 2; }
+    .cards, .now-grid, .projects { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr; gap: 10px; }
+    .feature > p { font-size: 17px; }
+    .feature, .dd, .proj { padding: 22px; gap: 22px; }
+    .proj { min-height: 0; }
+    .row > h2.eyebrow { position: static; }
+    .idx { display: inline; margin: 0 10px 0 0; }
     .card { aspect-ratio: auto; min-height: 190px; }
     .card h3 { font-size: 24px; margin-top: 28px; }
     .jobs li { grid-template-columns: 1fr; gap: 2px; }

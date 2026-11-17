@@ -87,11 +87,11 @@
 
 <main class="w">
     <section class="row now" aria-labelledby="now-h">
-        <h2 class="eyebrow" id="now-h">Now</h2>
-        <div>
+        <h2 class="eyebrow" id="now-h"><span class="idx">01</span>Now</h2>
+        <div class="now-grid">
             <a class="feature" href="https://easyenv.io/">
-                <p class="eyebrow">Co-founder &middot; since 2023</p>
-                <h3>EasyEnv <span class="arrow" aria-hidden="true">&#8599;</span></h3>
+                <div class="feature-top"><span class="tag">Co-founder &middot; since 2023</span><span class="go">easyenv.io &#8599;</span></div>
+                <h3>EasyEnv</h3>
                 <p>Technical interviews on real, production-like machines. Candidates debug a broken service, write code or design a system with AI allowed, and every keystroke is there to review afterwards.</p>
                 <ul class="facts">
                     <li><b>Real machines</b><span>Linux boxes, not a browser editor</span></li>
@@ -100,25 +100,25 @@
                 </ul>
             </a>
             <a class="dd" href="https://donedeploy.com/">
-                <p class="eyebrow">The company</p>
-                <h3>Donedeploy <span class="arrow" aria-hidden="true">&#8599;</span></h3>
+                <div class="feature-top"><span class="tag">The company</span><span class="go">donedeploy.com &#8599;</span></div>
+                <h3>Donedeploy</h3>
                 <p>Based in Ireland, behind EasyEnv and the projects below. Alongside our own products we design, build and run cloud infrastructure for other teams: Kubernetes, Terraform, observability and automation, at a fixed price.</p>
             </a>
         </div>
     </section>
 
     <section class="row" id="projects" aria-labelledby="projects-h">
-        <h2 class="eyebrow" id="projects-h">Projects</h2>
-        <ol class="projects">
-            <li><a href="https://fairprice.ie/"><span class="n">01</span><div><b>FairPrice</b><p>What things really cost in Ireland: groceries, energy, broadband, mobile, cars and rent, compared like with like every morning.</p></div><span class="url">fairprice.ie &#8599;</span></a></li>
-            <li><a href="https://gpfinder.ie/"><span class="n">02</span><div><b>GP Finder</b><p>Every GP practice in Ireland and which ones are taking new patients. AI reads the practice websites every week.</p></div><span class="url">gpfinder.ie &#8599;</span></a></li>
-            <li><a href="https://techhome.ie/"><span class="n">03</span><div><b>TechHome</b><p>Wi-Fi, Starlink, mobile signal, cameras and smart heating, installed properly in Irish homes.</p></div><span class="url">techhome.ie &#8599;</span></a></li>
-            <li><a href="https://sinbad.life/"><span class="n">04</span><div><b>sinbad.life</b><p>A trip planner you talk to: one sentence becomes a day-by-day plan you change by asking.</p></div><span class="url">sinbad.life &#8599;</span></a></li>
-        </ol>
+        <h2 class="eyebrow" id="projects-h"><span class="idx">02</span>Projects</h2>
+        <div class="projects">
+            <a class="proj p1" href="https://fairprice.ie/"><div class="feature-top"><span class="tag">Prices</span><span class="go">&#8599;</span></div><div><b>FairPrice</b><p>What things really cost in Ireland: groceries, energy, broadband, mobile, cars and rent, compared like with like every morning.</p><span class="url">fairprice.ie</span></div></a>
+            <a class="proj p2" href="https://gpfinder.ie/"><div class="feature-top"><span class="tag">Health</span><span class="go">&#8599;</span></div><div><b>GP Finder</b><p>Every GP practice in Ireland and which ones are taking new patients. AI reads the practice websites every week.</p><span class="url">gpfinder.ie</span></div></a>
+            <a class="proj p3" href="https://techhome.ie/"><div class="feature-top"><span class="tag">Home</span><span class="go">&#8599;</span></div><div><b>TechHome</b><p>Wi-Fi, Starlink, mobile signal, cameras and smart heating, installed properly in Irish homes.</p><span class="url">techhome.ie</span></div></a>
+            <a class="proj p4" href="https://sinbad.life/"><div class="feature-top"><span class="tag">Travel</span><span class="go">&#8599;</span></div><div><b>sinbad.life</b><p>A trip planner you talk to: one sentence becomes a day-by-day plan you change by asking.</p><span class="url">sinbad.life</span></div></a>
+        </div>
     </section>
 
     <section class="row about" id="about" aria-labelledby="about-h">
-        <h2 class="eyebrow" id="about-h">About</h2>
+        <h2 class="eyebrow" id="about-h"><span class="idx">03</span>About</h2>
         <div>
             <p class="big">Most of my work is the part nobody notices when it goes well: one pipeline for <em>two hundred projects</em> at Clover, a platform quant developers build on at <em>RBC</em>, a cluster of a hundred nodes that ran on cloud servers, Jetsons and <em>Raspberry Pis</em>.</p>
             <p>Before Ireland I co-founded Cvas in Tehran, grew its engineering team to thirty and took it through an acquisition, and helped start IrPycon and TehranLUG. EasyEnv came out of thousands of technical interviews: I wanted one that looks like the job does now, a real machine with AI in the room.</p>
@@ -126,7 +126,7 @@
     </section>
 
     <section class="row" aria-labelledby="work-h">
-        <h2 class="eyebrow" id="work-h">What I work on</h2>
+        <h2 class="eyebrow" id="work-h"><span class="idx">04</span>What I work on</h2>
         <dl class="work">
             <div><dt>Platforms</dt><dd>Paved roads, so product teams ship without learning the plumbing.</dd></div>
             <div><dt>Kubernetes and cloud</dt><dd>AWS, GCP, Hetzner, bare metal and the edge, x86 and ARM.</dd></div>
@@ -138,7 +138,7 @@
     </section>
 
     <section class="row" aria-labelledby="writing-h">
-        <h2 class="eyebrow" id="writing-h">Writing</h2>
+        <h2 class="eyebrow" id="writing-h"><span class="idx">05</span>Writing</h2>
         <div>
         <!-- posts:start -->
         <div class="cards"><a class="card c1" href="/blog/hiring-engineers-when-ai-is-in-the-room/"><span class="t">Hiring</span><div><h3>Hiring engineers when AI is in the room</h3><p>Banning AI tests a job that no longer exists.</p></div></a><a class="card c2" href="/blog/engineering-with-claude-code/"><span class="t">AI</span><div><h3>How I build with AI coding agents every day</h3><p>What I hand to an agent, and what I keep.</p></div></a><a class="card c3" href="/blog/first-30-days-with-an-unfamiliar-infrastructure/"><span class="t">Platform</span><div><h3>The first 30 days with an unfamiliar infrastructure</h3><p>Map it before you touch it.</p></div></a></div>
@@ -154,7 +154,7 @@
     </section>
 
     <section class="row" aria-labelledby="exp-h">
-        <h2 class="eyebrow" id="exp-h">Experience</h2>
+        <h2 class="eyebrow" id="exp-h"><span class="idx">06</span>Experience</h2>
         <div>
             <ul class="jobs">
                 <li><span class="when">2023 &ndash; now</span><b>Donedeploy</b><span class="what">Co-founder of EasyEnv</span></li>
@@ -170,7 +170,7 @@
     </section>
 
     <section class="row" aria-labelledby="oss-h">
-        <h2 class="eyebrow" id="oss-h">Open source</h2>
+        <h2 class="eyebrow" id="oss-h"><span class="idx">07</span>Open source</h2>
         <div>
             <ul class="list">
                 <li><a href="https://github.com/efazati/i3buntu"><b>i3buntu</b><span>A minimal i3 desktop for Ubuntu</span></a></li>
