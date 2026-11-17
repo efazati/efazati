@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://efazati.org/sitemap.xml
+
+# For language models: https://efazati.org/llms.txt

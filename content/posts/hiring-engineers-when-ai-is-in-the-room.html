@@ -1,0 +1,49 @@
+title: Hiring engineers when AI is in the room
+date: 2026-11-17
+tag: Hiring
+description: Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.
+teaser: Banning AI tests a job that no longer exists.
+---
+<p>I have run thousands of technical interviews over twenty years. For most of that time the hard part was the format: LeetCode puzzles that predicted nothing, take-home tasks you could not trust, whiteboard sessions that rewarded people who had practised whiteboard sessions. Then AI arrived and made every one of those formats worse at once.</p>
+
+<p>The common reaction was to ban it. Lock the browser, forbid the assistant, watch for a second screen. I understand the instinct, but it tests a job that no longer exists. The engineer you hire will use AI on their first morning. If the interview pretends otherwise, you learn how someone performs in a situation they will never be in again.</p>
+
+<h2>The answer stopped being the signal</h2>
+
+<p>When a model can produce a correct function in four seconds, a correct function tells you very little. What still separates people is everything around it:</p>
+
+<ul>
+<li><strong>How they frame the problem</strong> before they type anything. Do they read the logs, check what is running, ask what "done" means?</li>
+<li><strong>What they ask the model,</strong> and how specific they are. A vague prompt and a precise one say a lot about how well someone understands the system in front of them.</li>
+<li><strong>Whether they check the output.</strong> The dangerous engineer is not the one who uses AI. It is the one who pastes whatever comes back into production.</li>
+<li><strong>What they do when it is wrong.</strong> Models are confidently wrong often enough that recovering from a bad suggestion is now a core skill.</li>
+</ul>
+
+<p>None of that shows up in the final answer. All of it shows up in the process.</p>
+
+<h2>Put them on a real machine</h2>
+
+<p>The other half of the problem is the environment. Most interview tools give a candidate an editor and a "run" button. Real work happens on a Linux box with a broken service, a full disk, a misconfigured proxy and a log file that is lying to you. Infrastructure and backend roles especially are about the system, not the snippet.</p>
+
+<p>So the interview should look like the job: a real machine, the tools the role actually uses, AI available, and a problem that has more than one reasonable way in. Then you watch how they get there.</p>
+
+<blockquote>Let candidates use AI the way they will at work, and make the process the thing you evaluate.</blockquote>
+
+<h2>What I look for now</h2>
+
+<p>When I review a session today, these are the moments I go back to:</p>
+
+<ol>
+<li><strong>The first two minutes.</strong> Does the candidate orient themselves (<code>systemctl status</code>, <code>journalctl</code>, <code>df -h</code>, reading the task twice) or start changing things?</li>
+<li><strong>The first wrong turn.</strong> Everyone takes one. How long before they notice, and what makes them notice?</li>
+<li><strong>The handoff to AI.</strong> Is the model a tool they direct or a crutch they follow?</li>
+<li><strong>The verification.</strong> Did they prove the fix, or did the error just go away?</li>
+</ol>
+
+<p>A candidate who takes longer but verifies every step is usually a better hire than one who finishes fast and cannot say why it works.</p>
+
+<h2>Why I built EasyEnv</h2>
+
+<p>I wanted this kind of interview to be the easy option rather than a special effort. That is what <a href="https://easyenv.io/">EasyEnv</a> does: interviews on real Linux machines in the browser, AI allowed, and a full replay of every terminal, editor and browser action so the team can review the process, not just the result.</p>
+
+<p>If you are rethinking how your team hires engineers, I would like to hear what you are trying.</p>

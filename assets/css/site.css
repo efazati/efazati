@@ -1,0 +1,224 @@
+/* efazati.org: one stylesheet for the home page and the blog.
+
+   The portrait direction: dark, one big black and white photo, a large name
+   and plain sentences. It came after five rounds; he picked it from a page of
+   real sites and mockups. The text-first version before it was "too simple",
+   the glow version before that "too AI", so the decoration here is the photo,
+   the type size and one yellow, nothing else.
+
+   On a phone the header sits above the photo, never on it: an overlaid nav
+   was unreadable where the photo is bright. */
+
+:root {
+    --bg: #0b0b0c;
+    --text: #f2f2f0;
+    --soft: #d6d6d3;
+    --muted: #9a9a98;
+    --faint: #6d6d6b;
+    --line: #262628;
+    --accent: #f5c518;
+    --code-bg: #161618;
+    --sans: Manrope, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 24px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+img { max-width: 100%; display: block; }
+p { margin: 0 0 1em; }
+h1, h2, h3 { margin: 0; }
+a { color: inherit; text-decoration-color: var(--faint); text-underline-offset: 4px; text-decoration-thickness: 1px; transition: color .15s, text-decoration-color .15s; }
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+.w { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+
+/* Header: the same markup on every page. */
+.top { display: flex; align-items: center; gap: 26px; font-size: 15px; padding: 28px 0; color: var(--muted); }
+.top .name { color: var(--text); font-weight: 800; letter-spacing: -.01em; margin-right: auto; text-decoration: none; }
+.top nav { display: flex; gap: 24px; }
+.top nav a { text-decoration: none; }
+.top nav a[aria-current] { color: var(--text); }
+
+/* Home: the portrait. */
+.hero { display: grid; grid-template-columns: 1.1fr .9fr; grid-template-areas: "top photo" "text photo"; grid-template-rows: auto 1fr; min-height: min(92vh, 900px); border-bottom: 1px solid var(--line); }
+.hero .top { grid-area: top; padding: 28px 48px; }
+.hero .text { grid-area: text; padding: 0 48px 64px; align-self: end; }
+.hero .photo { grid-area: photo; position: relative; overflow: hidden; }
+.hero .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 40%; filter: grayscale(1) contrast(1.08) brightness(.92); }
+.hero .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, rgba(11,11,12,.35) 30%, transparent 65%); }
+.hero .where { position: absolute; right: 24px; bottom: 20px; z-index: 1; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #cfcfcc; }
+.hero .role { color: var(--accent); margin-bottom: 18px; }
+.hero h1 { font-size: clamp(54px, 8.4vw, 128px); line-height: .9; letter-spacing: -.05em; font-weight: 800; margin-bottom: 28px; }
+.hero .lede { font-size: 20px; line-height: 1.55; max-width: 34em; color: var(--soft); margin: 0; }
+.hero .lede a { text-decoration-color: var(--accent); }
+
+/* Home: sections are a label on the left and content on the right. */
+.row { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 72px 0; border-bottom: 1px solid var(--line); }
+.row > h2 { padding-top: 8px; }
+.big { font-size: clamp(23px, 2.6vw, 32px); line-height: 1.35; letter-spacing: -.02em; font-weight: 500; margin: 0 0 24px; }
+.big em { font-style: normal; color: var(--accent); }
+.about p:not(.big) { color: var(--soft); max-width: 40em; }
+
+.work { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin: 0; }
+.work div { padding: 18px 0; border-top: 1px solid var(--line); }
+.work dt { font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+.work dd { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.card { aspect-ratio: 4 / 5; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; transition: transform .2s; }
+.card:hover { transform: translateY(-4px); color: inherit; }
+.card .t { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; opacity: .7; }
+.card h3 { font-size: 25px; line-height: 1.12; letter-spacing: -.025em; font-weight: 800; }
+.card p { font-size: 14.5px; line-height: 1.45; margin: 12px 0 0; opacity: .8; }
+.card.c1 { background: var(--accent); color: #111; }
+.card.c2 { background: #e8e6e1; color: #111; }
+.card.c3 { background: #1f3b2d; color: #e9f3ec; }
+
+.list { list-style: none; margin: 0; padding: 0; }
+.list li { border-top: 1px solid var(--line); }
+.list a { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: baseline; padding: 16px 0; text-decoration: none; }
+.list a b { font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
+.list a span { color: var(--muted); font-size: 14px; }
+.list a:hover b { color: var(--accent); }
+.more { margin: 22px 0 0; font-size: 15px; }
+.more a { color: var(--muted); }
+
+.jobs { list-style: none; margin: 0; padding: 0; }
+.jobs li { display: grid; grid-template-columns: 130px 1fr auto; gap: 20px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--line); }
+.jobs .when { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.jobs b { font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
+.jobs .what { color: var(--muted); font-size: 14px; text-align: right; }
+
+.end { padding: 96px 0 40px; }
+.end h2 { font-size: clamp(48px, 7vw, 104px); line-height: .92; letter-spacing: -.05em; font-weight: 800; margin-bottom: 28px; }
+.end h2 a { color: var(--accent); text-decoration: none; }
+.end p { font-size: 20px; color: var(--soft); max-width: 32em; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: 16px; margin-top: 26px; }
+.links a { text-decoration: none; color: var(--muted); }
+.links a:hover { color: var(--accent); }
+.links a.mail { color: var(--text); border-bottom: 1px solid var(--accent); }
+
+footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 28px 0 40px; margin-top: 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--faint); }
+footer nav { display: flex; gap: 20px; }
+footer a { text-decoration: none; }
+
+/* Now and Projects. Screenshots of the sites were tried and made the page
+   look cheaper, so these are solid panels in the same family as the writing
+   cards: EasyEnv in the one yellow, Donedeploy quiet beside it, and each
+   project a dark tile of its own colour. */
+.idx { display: block; color: var(--accent); font-size: 12px; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.row > h2.eyebrow { position: sticky; top: 24px; align-self: start; }
+.now-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; }
+.feature, .dd, .proj { display: flex; flex-direction: column; justify-content: space-between; gap: 28px; text-decoration: none; border-radius: 8px; padding: 26px 28px 28px; transition: transform .2s, border-color .2s; }
+.feature:hover, .dd:hover, .proj:hover { transform: translateY(-3px); color: inherit; }
+.feature-top { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+.feature-top .go { letter-spacing: .02em; text-transform: none; font-size: 14px; font-weight: 600; }
+.feature { background: var(--accent); color: #111; }
+.feature .feature-top { color: rgba(17,17,17,.7); }
+.feature h3 { font-size: clamp(52px, 6.4vw, 92px); line-height: .9; letter-spacing: -.055em; font-weight: 800; margin-top: 24px; }
+.feature > p { font-size: 19px; line-height: 1.5; max-width: 30em; margin: 0; color: #1d1d1b; }
+.facts { list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid rgba(17,17,17,.25); display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.facts b { display: block; font-size: 16px; }
+.facts span { font-size: 14px; color: rgba(17,17,17,.7); }
+.dd { border: 1px solid var(--line); background: #121214; }
+.dd .feature-top { color: var(--muted); }
+.dd:hover { border-color: var(--faint); }
+.dd h3 { font-size: clamp(34px, 3.6vw, 48px); line-height: .95; letter-spacing: -.045em; font-weight: 800; margin-top: auto; }
+.dd p { color: var(--soft); margin: 0; font-size: 16px; }
+.dd:hover .go, .proj:hover .go { color: var(--accent); }
+
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.proj { min-height: 300px; border: 1px solid rgba(255,255,255,.06); }
+.proj .feature-top { color: rgba(255,255,255,.6); }
+.proj .go { font-size: 18px; }
+.proj b { display: block; font-size: clamp(30px, 3vw, 40px); line-height: 1; font-weight: 800; letter-spacing: -.045em; margin-bottom: 12px; color: #fff; }
+.proj p { margin: 0 0 18px; font-size: 15.5px; line-height: 1.5; color: rgba(255,255,255,.72); max-width: 30em; }
+.proj .url { font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.85); border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 1px; }
+.p1 { background: #13203a; }
+.p2 { background: #0f2e2a; }
+.p3 { background: #2a1838; }
+.p4 { background: #e8e1d3; border-color: transparent; }
+.p4 .feature-top { color: rgba(17,17,17,.6); }
+.p4 b { color: #111; }
+.p4 p { color: rgba(17,17,17,.75); }
+.p4 .url { color: #111; border-color: rgba(17,17,17,.35); }
+
+/* Blog index. */
+.page-head { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+.page-head h1 { font-size: clamp(54px, 8vw, 112px); line-height: .92; letter-spacing: -.05em; font-weight: 800; margin-bottom: 20px; }
+.page-head p { font-size: 20px; color: var(--soft); max-width: 36em; margin: 0; }
+.posts { list-style: none; margin: 0 0 40px; padding: 0; }
+.posts li { border-bottom: 1px solid var(--line); }
+.posts a { display: grid; grid-template-columns: 160px 1fr; gap: 32px; padding: 30px 0; text-decoration: none; }
+.posts .meta { color: var(--muted); font-size: 14px; padding-top: 6px; }
+.posts .meta b { display: block; color: var(--accent); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.posts h2 { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; letter-spacing: -.02em; font-weight: 700; margin-bottom: 8px; }
+.posts p { color: var(--muted); margin: 0; max-width: 42em; }
+.posts a:hover h2 { color: var(--accent); }
+
+/* A post. */
+.article { max-width: 720px; margin: 0 auto; padding: 48px 0 0; }
+.article .kicker { color: var(--accent); margin-bottom: 18px; }
+.article h1 { font-size: clamp(36px, 5.2vw, 60px); line-height: 1.04; letter-spacing: -.04em; font-weight: 800; margin-bottom: 20px; }
+.article .meta { color: var(--muted); font-size: 15px; padding-bottom: 32px; margin-bottom: 36px; border-bottom: 1px solid var(--line); }
+.prose { font-size: 18.5px; line-height: 1.75; color: #e4e4e1; }
+.prose h2 { font-size: 27px; line-height: 1.25; letter-spacing: -.02em; font-weight: 800; margin: 2.1em 0 .6em; color: var(--text); }
+.prose h3 { font-size: 21px; font-weight: 700; margin: 1.8em 0 .5em; color: var(--text); }
+.prose p, .prose ul, .prose ol, .prose pre, .prose blockquote { margin: 0 0 1.25em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin-bottom: .45em; }
+.prose li::marker { color: var(--accent); }
+.prose a { text-decoration-color: var(--accent); }
+.prose strong { color: var(--text); }
+.prose code { font-family: var(--mono); font-size: .84em; background: var(--code-bg); border: 1px solid var(--line); padding: .1em .35em; border-radius: 4px; }
+.prose pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; overflow-x: auto; line-height: 1.55; }
+.prose pre code { background: none; border: 0; padding: 0; font-size: 14.5px; }
+.prose blockquote { border-left: 3px solid var(--accent); padding: 2px 0 2px 20px; color: var(--soft); font-size: 20px; }
+.after { max-width: 720px; margin: 56px auto 0; padding-top: 36px; border-top: 1px solid var(--line); }
+.after > p { color: var(--soft); }
+.after .eyebrow { margin: 36px 0 8px; }
+
+/* 404 */
+.lost { padding: 96px 0 64px; }
+.lost h1 { font-size: clamp(54px, 8vw, 112px); line-height: .92; letter-spacing: -.05em; font-weight: 800; margin-bottom: 24px; }
+.lost p { font-size: 20px; color: var(--soft); }
+
+@media (max-width: 900px) {
+    .w { padding: 0 22px; }
+    .top { padding: 20px 0; gap: 18px; }
+    .top nav { gap: 18px; }
+    .hero { grid-template-columns: 1fr; grid-template-areas: "top" "photo" "text"; grid-template-rows: auto auto auto; min-height: 0; }
+    .hero .top { padding: 18px 22px; }
+    .hero .photo { aspect-ratio: 4 / 3; }
+    .hero .photo::after { background: linear-gradient(0deg, var(--bg) 0%, transparent 45%); }
+    .hero .text { padding: 8px 22px 48px; }
+    .hero h1 { margin-bottom: 20px; }
+    .hero .lede { font-size: 18px; }
+    .row { grid-template-columns: 1fr; gap: 20px; padding: 52px 0; }
+    .row > h2 { padding-top: 0; }
+    .work { grid-template-columns: 1fr; }
+    .cards, .now-grid, .projects { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr; gap: 10px; }
+    .feature > p { font-size: 17px; }
+    .feature, .dd, .proj { padding: 22px; gap: 22px; }
+    .proj { min-height: 0; }
+    .row > h2.eyebrow { position: static; }
+    .idx { display: inline; margin: 0 10px 0 0; }
+    .card { aspect-ratio: auto; min-height: 190px; }
+    .card h3 { font-size: 24px; margin-top: 28px; }
+    .jobs li { grid-template-columns: 1fr; gap: 2px; }
+    .jobs .what { text-align: left; }
+    .list a { grid-template-columns: 1fr; gap: 2px; }
+    .posts a { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
+    .posts .meta { padding: 0; }
+    .end { padding: 64px 0 24px; }
+    .end p, .page-head p { font-size: 18px; }
+    .prose { font-size: 17.5px; }
+}
+@media (max-width: 380px) {
+    .top nav { gap: 14px; font-size: 14px; }
+}

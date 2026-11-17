@@ -1,0 +1,48 @@
+title: One CI/CD for 200 projects
+date: 2026-11-17
+tag: CI/CD
+description: Unifying build and deploy across 200+ projects at a payments company: a single SCM strategy, a Jenkins nobody has to worry about, and caching the outside world.
+teaser: One delivery path for a payments company.
+---
+<p>At Clover, part of Fiserv, I owned reliability and capacity for the product's infrastructure, and later managed the EMEA DevOps team. One of the larger pieces of work was bringing more than 200 projects onto one way of building and deploying. Here is what made it work.</p>
+
+<h2>Start with the repository, not the pipeline</h2>
+
+<p>Two hundred projects had grown two hundred habits: different branch names, different tagging, different ideas of what "release" means. You cannot write one pipeline for that. So the first step was a single SCM strategy: how branches are named, how versions are cut, what triggers a build and what triggers a deploy.</p>
+
+<p>Once every project agreed on those rules, the pipeline became a shared template with a few parameters, rather than two hundred bespoke scripts.</p>
+
+<h2>Make the CI server boring</h2>
+
+<p>When the build server is unreliable, every team pays for it many times a day. We redesigned Jenkins with:</p>
+
+<ul>
+<li><strong>Autoscaling agents,</strong> so a busy morning did not mean a forty-minute queue, and a quiet night did not mean paying for idle machines.</li>
+<li><strong>High availability,</strong> so one controller failing was an event, not an outage.</li>
+<li><strong>A hardened security model,</strong> because a CI server holds the keys to production and should be treated that way.</li>
+</ul>
+
+<p>The best compliment a CI system gets is that nobody talks about it.</p>
+
+<h2>Environments people can trust</h2>
+
+<p>We ran Dev Integration, Staging and QA tiers, and added ephemeral test environments alongside them: a short-lived copy of the stack for a single change, created when needed and destroyed after. Shared environments are where tests go to become flaky; ephemeral ones let a team prove their change without waiting for, or breaking, anyone else.</p>
+
+<h2>Cache the outside world</h2>
+
+<p>A payments product talks to a lot of external services, and builds and tests pull a lot from the internet. Both are outside your control. We put an outbound caching layer in front of them, built on Squid, with health-checked traffic rotation written in Go, so a slow or failing upstream did not take our builds and environments down with it.</p>
+
+<p>It is a small piece of infrastructure that removes a whole category of "it failed for no reason" from everyone's day.</p>
+
+<h2>Process matters as much as tooling</h2>
+
+<p>Alongside the technical work we changed how infrastructure work came in, separating run-the-business tasks from project work. Without that, the platform team spends its life on interrupts and the unification never finishes.</p>
+
+<h2>The short version</h2>
+
+<ol>
+<li>Agree on conventions before you write the shared pipeline.</li>
+<li>Invest in the CI server until it is boring.</li>
+<li>Give each change its own environment when you can.</li>
+<li>Put a buffer between you and things you do not control.</li>
+</ol>

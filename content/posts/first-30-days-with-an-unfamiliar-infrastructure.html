@@ -1,0 +1,50 @@
+title: The first 30 days with an unfamiliar infrastructure
+date: 2026-11-17
+tag: Platform
+description: How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.
+teaser: Map it before you touch it.
+---
+<p>I have joined a lot of infrastructures that someone else built. Banks, payment companies, edge platforms, startups with one server and a prayer. The details change every time, but the first month looks surprisingly similar, and getting it right matters more than anything clever I do later.</p>
+
+<h2>Week one: map it, do not fix it</h2>
+
+<p>The temptation on day one is to spot something ugly and clean it up. Resist it. Every odd thing in a working system is there for a reason, and until you know the reason you cannot tell a scar from a bug.</p>
+
+<p>Instead I build a map:</p>
+
+<ul>
+<li><strong>What runs where.</strong> Clusters, VMs, managed services, the box under someone's desk that turns out to run payroll.</li>
+<li><strong>How code reaches production.</strong> Every pipeline, every manual step, every "ask Dave".</li>
+<li><strong>Where the state lives.</strong> Databases, buckets, queues, and who restores them when they break.</li>
+<li><strong>Who gets woken up,</strong> and for what.</li>
+</ul>
+
+<p>The map is usually wrong in places the first time. That is fine. The act of drawing it is what makes the questions obvious.</p>
+
+<h2>Week two: follow the pain</h2>
+
+<p>Every team has a short list of things that hurt every week. Flaky deploys, a CI queue that takes forty minutes, an alert that fires every night and gets ignored. I read the incident history, sit in on on-call handovers and ask one question of everyone: <em>what do you wish you never had to do again?</em></p>
+
+<p>The answers are almost never what leadership thinks the problem is. They are also where trust comes from.</p>
+
+<h2>Week three: one small, visible win</h2>
+
+<p>Pick something from that list that is annoying, well understood and fixable in a few days. Fix it properly, with monitoring and a short write-up, and make sure the people who suffered from it notice.</p>
+
+<p>At Clover that kind of win was making Jenkins boring: autoscaling agents, high availability and a tighter security model, so builds stopped being the thing everyone complained about. It is not glamorous. It buys the credibility you need for the bigger changes.</p>
+
+<h2>Week four: write the plan down</h2>
+
+<p>By now I know enough to write a short plan: what we keep, what we change, in what order, and what each step makes measurably better. I separate run-the-business work from project work so the team can see both, and so the urgent never quietly eats the important.</p>
+
+<p>A good plan is mostly a list of things we are deliberately <em>not</em> doing yet.</p>
+
+<h2>What I avoid</h2>
+
+<ul>
+<li><strong>Rewriting on arrival.</strong> A rewrite throws away years of fixed edge cases you have not met yet.</li>
+<li><strong>Tool-first thinking.</strong> "We should move to X" is not a plan until you can say what problem X solves here.</li>
+<li><strong>Heroics.</strong> If the fix only works while I am around, it is not a fix.</li>
+</ul>
+
+<p>The goal of the first month is not to change much. It is to understand enough that the changes after it are the right ones, and to have the team on side when they happen.</p>

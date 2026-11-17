@@ -1,0 +1,46 @@
+title: OpenTelemetry before the vendor
+date: 2026-11-17
+tag: Observability
+description: Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.
+teaser: Instrument once, pick the backend later.
+---
+<p>At Royal Bank of Canada I led a small team building an internal developer platform. The people using it were quant developers: very good at their own work, and with no interest in learning Jenkins, Kubernetes or HTTP plumbing. The platform's job was to let them ship to production without touching any of it.</p>
+
+<p>One of the first decisions was how services would report what they were doing. We chose OpenTelemetry, before choosing where the data would go. I would make the same choice again anywhere.</p>
+
+<h2>Instrumentation outlives backends</h2>
+
+<p>Instrumenting a codebase is expensive. It touches every service, every library, every team. Backends, on the other hand, change: a contract ends, a new tool is cheaper, a team inherits a different stack after a reorganisation.</p>
+
+<p>If your traces and metrics are written against one vendor's SDK, switching vendors means re-instrumenting everything. If they are written against OpenTelemetry, switching is a collector config change.</p>
+
+<pre><code>exporters:
+  otlp/tempo:
+    endpoint: tempo:4317
+  prometheus:
+    endpoint: 0.0.0.0:8889
+service:
+  pipelines:
+    traces:  { receivers: [otlp], exporters: [otlp/tempo] }
+    metrics: { receivers: [otlp], exporters: [prometheus] }</code></pre>
+
+<p>That separation is the whole point. Code says what happened. The collector decides where it goes.</p>
+
+<h2>Make it the default, not a task</h2>
+
+<p>On a platform, observability only works if it is already there when a developer arrives. We baked it into the developer environment and the project scaffolding, so a new service came with tracing, metrics and sensible resource attributes from its first commit. Nobody had to read a wiki page to be observable.</p>
+
+<p>The same applied underneath: we ran our own Prometheus cluster and built custom Linux containers on OpenShift as Jenkins agents, so the build and runtime sides told the same story.</p>
+
+<h2>Things that matter more than the tool</h2>
+
+<ul>
+<li><strong>Consistent service names and attributes.</strong> A trace that crosses five services is useless if each one names itself differently.</li>
+<li><strong>Sampling decided on purpose.</strong> Keep every error and slow request; sample the boring successes.</li>
+<li><strong>Dashboards that answer a question.</strong> "Is checkout slower than yesterday?" beats forty panels of CPU graphs.</li>
+<li><strong>Alerts on symptoms, not causes.</strong> Page on users seeing errors, not on a node's memory at 80%.</li>
+</ul>
+
+<h2>The stack I reach for</h2>
+
+<p>When I get to choose, it is usually OpenTelemetry for instrumentation, Prometheus for metrics, Loki for logs, Tempo for traces and Grafana on top. All open, all replaceable, and they work well together. But the real recommendation is the order: instrument with an open standard first, pick the backend second, and keep the two apart.</p>

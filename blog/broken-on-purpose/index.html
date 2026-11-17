@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broken on purpose: designing interview challenges that feel like the job | Mohammad Efazati</title>
+<meta name="description" content="How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.">
+<meta name="author" content="Mohammad Efazati">
+<link rel="canonical" href="https://efazati.org/blog/broken-on-purpose/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://efazati.org/blog/broken-on-purpose/">
+<meta property="og:title" content="Broken on purpose: designing interview challenges that feel like the job">
+<meta property="og:description" content="How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.">
+<meta property="og:image" content="https://efazati.org/assets/images/me.jpg">
+<meta property="og:site_name" content="Mohammad Efazati">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Broken on purpose: designing interview challenges that feel like the job">
+<meta name="twitter:description" content="How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.">
+<link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
+<link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Broken on purpose: designing interview challenges that feel like the job","description":"How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.","datePublished":"2026-11-17","dateModified":"2026-11-17","url":"https://efazati.org/blog/broken-on-purpose/","mainEntityOfPage":"https://efazati.org/blog/broken-on-purpose/","image":"https://efazati.org/assets/images/me.jpg","author":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"},"publisher":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"}}
+</script>
+</head>
+<body>
+<div class="w">
+<header class="top">
+    <a class="name" href="/">Efazati</a>
+    <nav aria-label="Primary">
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/blog/" aria-current="page">Writing</a>
+        <a href="/#contact">Contact</a>
+    </nav>
+</header>
+<main>
+<article class="article">
+    <p class="eyebrow kicker">EasyEnv</p>
+    <h1>Broken on purpose: designing interview challenges that feel like the job</h1>
+    <p class="meta">Mohammad Efazati &middot; <time datetime="2026-11-17">17 Nov 2026</time> &middot; 2 min read</p>
+    <div class="prose">
+<p>The best way I know to see how an infrastructure engineer works is to give them a machine that is broken and watch them fix it. At <a href="https://easyenv.io/">EasyEnv</a> we build those machines as code: more than fifty Ansible recipes that set up anything from a single Nginx box to a Kubernetes cluster with an ELK stack and monitoring, many of them broken on purpose.</p>
+
+<p>Building a good broken machine is harder than it sounds. Here is what we have learned.</p>
+
+<h2>It has to be believable</h2>
+
+<p>The failure should be one the candidate could meet in real life. A service that will not start because its config points at a socket that moved. A disk filled by logs nobody rotates. A certificate that expired on Friday. A Kubernetes pod stuck because a resource limit is set in the wrong unit.</p>
+
+<p>Artificial puzzles (a file hidden in a weird place, a riddle in a comment) test patience, not skill. Real failures test exactly what you will pay them to do.</p>
+
+<h2>It has to be reproducible</h2>
+
+<p>Every candidate for a role should get the same problem. That rules out "break it by hand before the interview". Each challenge is an Ansible recipe: it builds a clean machine, then applies the breakage as a final, deliberate step. The same recipe gives the same machine every time, and a fix for the recipe is a pull request like any other.</p>
+
+<p>Building on recipes also means the healthy version and the broken version share almost everything, which makes the challenge easy to maintain when a distribution or package version moves on.</p>
+
+<h2>It needs more than one way in</h2>
+
+<p>A good challenge does not have a single magic command. One candidate starts with <code>journalctl</code>, another with <code>ss -ltnp</code>, a third reads the config first. All of them can get there. What you learn is how each one thinks, and that is only visible when the path is theirs.</p>
+
+<h2>It needs a clear definition of fixed</h2>
+
+<p>"Make the site work" is not enough, because a candidate can make the symptom disappear without fixing the cause. Each challenge comes with a check that proves the system is healthy, and the interesting part of the review is often the gap between "the error went away" and "it is actually fixed".</p>
+
+<h2>AI does not make it easier, and that is the point</h2>
+
+<p>Candidates on EasyEnv can use AI, as they would at work. A model can suggest commands, but it cannot see the machine. The candidate still has to look, decide what matters, and judge whether the suggestion fits what they see. Broken-on-purpose challenges turn out to be one of the clearest ways to tell an engineer who directs the AI from one who follows it.</p>
+
+<h2>What a good challenge looks like</h2>
+
+<ul>
+<li>A real failure, in a real stack the role uses.</li>
+<li>Built entirely from a recipe, so every candidate gets the same machine.</li>
+<li>Several reasonable starting points.</li>
+<li>A check that proves the fix, not just the absence of an error.</li>
+<li>Small enough to solve in the time you give, deep enough to show judgement.</li>
+</ul>
+
+<p>Curious what this looks like in practice? <a href="https://easyenv.io/">Try EasyEnv</a>.</p>
+    </div>
+</article>
+<div class="after">
+    <p>Thoughts on this? I am happy to compare notes: <a href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>.</p>
+    <p class="eyebrow">More writing</p>
+    <ul class="list">
+    <li><a href="/blog/hiring-engineers-when-ai-is-in-the-room/"><b>Hiring engineers when AI is in the room</b><span>Hiring</span></a></li>
+    <li><a href="/blog/engineering-with-claude-code/"><b>How I build with AI coding agents every day</b><span>AI</span></a></li>
+    <li><a href="/blog/first-30-days-with-an-unfamiliar-infrastructure/"><b>The first 30 days with an unfamiliar infrastructure</b><span>Platform</span></a></li>
+    </ul>
+</div>
+</main>
+<footer>
+    <span>&copy; 2026 Mohammad Efazati</span>
+    <nav aria-label="Footer">
+        <a href="/feed.xml">RSS</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/efazati" rel="me">GitHub</a>
+        <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+    </nav>
+</footer>
+</div>
+</body>
+</html>

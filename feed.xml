@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Mohammad Efazati: writing</title>
+  <link>https://efazati.org/blog/</link>
+  <atom:link href="https://efazati.org/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Platform engineering, Kubernetes, observability, CI/CD and technical hiring with AI.</description>
+  <language>en</language>
+  <item>
+    <title>Hiring engineers when AI is in the room</title>
+    <link>https://efazati.org/blog/hiring-engineers-when-ai-is-in-the-room/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/hiring-engineers-when-ai-is-in-the-room/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Hiring</category>
+    <description>Banning AI from technical interviews tests a job that no longer exists. What I look for instead, after thousands of interviews, and why the process is the signal now.</description>
+  </item>
+  <item>
+    <title>How I build with AI coding agents every day</title>
+    <link>https://efazati.org/blog/engineering-with-claude-code/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/engineering-with-claude-code/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>AI</category>
+    <description>A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.</description>
+  </item>
+  <item>
+    <title>The first 30 days with an unfamiliar infrastructure</title>
+    <link>https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/first-30-days-with-an-unfamiliar-infrastructure/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Platform</category>
+    <description>How I approach a platform I did not build: map it before touching it, find what actually pages people, and earn the right to change things with small wins.</description>
+  </item>
+  <item>
+    <title>Broken on purpose: designing interview challenges that feel like the job</title>
+    <link>https://efazati.org/blog/broken-on-purpose/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/broken-on-purpose/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>EasyEnv</category>
+    <description>How we build EasyEnv challenges as Ansible recipes that break a real machine in a believable way, and what makes a good one.</description>
+  </item>
+  <item>
+    <title>Kubernetes at the edge, on x86 and ARM</title>
+    <link>https://efazati.org/blog/kubernetes-at-the-edge-on-x86-and-arm/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/kubernetes-at-the-edge-on-x86-and-arm/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Kubernetes</category>
+    <description>Lessons from running a 100+ node Kubernetes cluster that spanned cloud servers, NVIDIA Jetsons and Raspberry Pis: multi-arch images, flaky links and installs as code.</description>
+  </item>
+  <item>
+    <title>OpenTelemetry before the vendor</title>
+    <link>https://efazati.org/blog/opentelemetry-before-the-vendor/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/opentelemetry-before-the-vendor/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>Observability</category>
+    <description>Why I instrument with OpenTelemetry first and pick a backend second, from building an internal developer platform inside a large bank.</description>
+  </item>
+  <item>
+    <title>One CI/CD for 200 projects</title>
+    <link>https://efazati.org/blog/one-ci-cd-for-200-projects/</link>
+    <guid isPermaLink="true">https://efazati.org/blog/one-ci-cd-for-200-projects/</guid>
+    <pubDate>Tue, 17 Nov 2026 09:00:00 +0000</pubDate>
+    <category>CI/CD</category>
+    <description>Unifying build and deploy across 200+ projects at a payments company: a single SCM strategy, a Jenkins nobody has to worry about, and caching the outside world.</description>
+  </item>
+</channel>
+</rss>

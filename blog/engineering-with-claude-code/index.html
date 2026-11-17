@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I build with AI coding agents every day | Mohammad Efazati</title>
+<meta name="description" content="A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.">
+<meta name="author" content="Mohammad Efazati">
+<link rel="canonical" href="https://efazati.org/blog/engineering-with-claude-code/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://efazati.org/blog/engineering-with-claude-code/">
+<meta property="og:title" content="How I build with AI coding agents every day">
+<meta property="og:description" content="A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.">
+<meta property="og:image" content="https://efazati.org/assets/images/me.jpg">
+<meta property="og:site_name" content="Mohammad Efazati">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How I build with AI coding agents every day">
+<meta name="twitter:description" content="A DevOps engineer&#x27;s working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.">
+<link rel="icon" type="image/jpeg" href="/assets/images/me.jpg">
+<link rel="alternate" type="application/rss+xml" title="Mohammad Efazati: writing" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I build with AI coding agents every day","description":"A DevOps engineer's working notes on using Claude Code and agent tooling for real infrastructure work: what to hand over, what to keep, and the guardrails that matter.","datePublished":"2026-11-17","dateModified":"2026-11-17","url":"https://efazati.org/blog/engineering-with-claude-code/","mainEntityOfPage":"https://efazati.org/blog/engineering-with-claude-code/","image":"https://efazati.org/assets/images/me.jpg","author":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"},"publisher":{"@type":"Person","name":"Mohammad Efazati","url":"https://efazati.org/"}}
+</script>
+</head>
+<body>
+<div class="w">
+<header class="top">
+    <a class="name" href="/">Efazati</a>
+    <nav aria-label="Primary">
+        <a href="/#about">About</a>
+        <a href="/#projects">Projects</a>
+        <a href="/blog/" aria-current="page">Writing</a>
+        <a href="/#contact">Contact</a>
+    </nav>
+</header>
+<main>
+<article class="article">
+    <p class="eyebrow kicker">AI</p>
+    <h1>How I build with AI coding agents every day</h1>
+    <p class="meta">Mohammad Efazati &middot; <time datetime="2026-11-17">17 Nov 2026</time> &middot; 2 min read</p>
+    <div class="prose">
+<p>Most of the code I ship today is written with an AI coding agent in the loop. EasyEnv itself is engineered with Claude Code, and its AI features are built on the Anthropic API and Agent SDK. After a lot of hours with these tools on real infrastructure, here is how I use them, and where I do not.</p>
+
+<h2>Hand over the typing, keep the judgement</h2>
+
+<p>Agents are excellent at the parts of the job that are mostly typing: wiring a new endpoint through four layers, writing the tests for a function you have already designed, converting a shell script into a proper tool, reading a long log and pointing at the interesting line.</p>
+
+<p>They are much weaker at deciding what should exist. Architecture, the boundary between two services, what to monitor, what not to build: those stay with me. The agent works best when I have already decided the shape and it fills it in.</p>
+
+<h2>Context is the real skill</h2>
+
+<p>The single biggest difference between a useful session and a frustrating one is context. A short project file that says how to build, test and deploy, what the house rules are, and what went wrong last time, saves more time than any prompt trick. When an agent repeats a mistake, the fix is usually to write the lesson down where it will be read next time, not to correct it again in chat.</p>
+
+<h2>Guardrails for infrastructure work</h2>
+
+<p>Infrastructure is where an agent's confidence is most dangerous, because the blast radius is real. The rules I hold to:</p>
+
+<ul>
+<li><strong>Nothing irreversible without a human.</strong> Deleting data, force-pushing, touching production: the agent proposes, I approve.</li>
+<li><strong>Tests before trust.</strong> A change is not done because the agent says so; it is done when the tests and the health check say so.</li>
+<li><strong>Verify every "does not exist".</strong> Agents and review bots will tell you a function is missing or a file is unused. Check before you act on it.</li>
+<li><strong>Deploy from one place.</strong> Many agents working at once on one codebase need the same discipline as many people: branches, commits, and one blessed path to production.</li>
+</ul>
+
+<h2>Where it changed my work most</h2>
+
+<p>The surprise was not speed on big features. It was how much small, useful work now gets done that never would have: the internal tool that saves ten minutes a day, the migration script with proper tests, the dashboard nobody had time for. The cost of "it would be nice if" dropped close to zero.</p>
+
+<h2>What this means for hiring</h2>
+
+<p>If engineers work like this, interviews should let them. That is a large part of why EasyEnv lets candidates use AI and records the whole session: the skill worth measuring now is how well someone directs and checks the machine, not whether they can type the answer from memory. I wrote more about that in <a href="/blog/hiring-engineers-when-ai-is-in-the-room/">Hiring engineers when AI is in the room</a>.</p>
+    </div>
+</article>
+<div class="after">
+    <p>Thoughts on this? I am happy to compare notes: <a href="mailto:mohammad@efazati.org">mohammad@efazati.org</a>.</p>
+    <p class="eyebrow">More writing</p>
+    <ul class="list">
+    <li><a href="/blog/hiring-engineers-when-ai-is-in-the-room/"><b>Hiring engineers when AI is in the room</b><span>Hiring</span></a></li>
+    <li><a href="/blog/first-30-days-with-an-unfamiliar-infrastructure/"><b>The first 30 days with an unfamiliar infrastructure</b><span>Platform</span></a></li>
+    <li><a href="/blog/broken-on-purpose/"><b>Broken on purpose: designing interview challenges that feel like the job</b><span>EasyEnv</span></a></li>
+    </ul>
+</div>
+</main>
+<footer>
+    <span>&copy; 2026 Mohammad Efazati</span>
+    <nav aria-label="Footer">
+        <a href="/feed.xml">RSS</a>
+        <a href="/llms.txt">llms.txt</a>
+        <a href="https://github.com/efazati" rel="me">GitHub</a>
+        <a href="https://www.linkedin.com/in/efazati" rel="me">LinkedIn</a>
+    </nav>
+</footer>
+</div>
+</body>
+</html>
